@@ -33,10 +33,13 @@ const TEXT_STYLE_SUFFIXES = TEXT_FAMILIES.flatMap((family) =>
   TEXT_WEIGHTS.map((weight) => `${family}-${weight}`),
 );
 
+/** Fluid marketing styles from styles/brand.css. */
+const BRAND_TEXT_STYLES = ["hero", "section", "subsection", "lead", "stat", "eyebrow"] as const;
+
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      "font-size": [{ text: TEXT_STYLE_SUFFIXES }],
+      "font-size": [{ text: [...TEXT_STYLE_SUFFIXES, ...BRAND_TEXT_STYLES] }],
     },
   },
 });
