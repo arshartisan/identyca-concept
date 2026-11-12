@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
-import { RiPlayFill } from "@remixicon/react";
+import { RiExternalLinkLine, RiPlayFill } from "@remixicon/react";
 import { cx } from "@/utils/cx";
 
 export const R2 = "https://pub-ef4926f03e79462ab0c0771d4c95c635.r2.dev/";
@@ -20,25 +20,39 @@ export const POSTERS = {
   avatar: `${R2}identyca-poster.png`,
 } as const;
 
-/** Poster-first video: loads nothing until play is pressed. */
+/**
+ * Poster-first video: loads nothing until play is pressed.
+ * Pass `webm` (VP9/AV1 + Opus) to support Chromium builds without H.264/AAC
+ * (Electron/editor preview panes). If loading fails, an "open in a new tab" fallback shows.
+ */
 export function VideoPlayer({
   src,
+  webm,
   poster,
   title,
   className,
 }: {
   src: string;
+  webm?: string;
   poster?: string;
   title: string;
   className?: string;
 }) {
-  const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [unsupported, setUnsupported] = useState(false);
 
-  const play = () => {
-    setPlaying(true);
-    requestAnimationFrame(() => ref.current?.play().catch(() => {}));
-  };
+  // Start playback as soon as the <video> is actually mounted (the click gave us user activation).
+  // Calling play() from a rAF raced React's commit, so the ref was often still null.
+  const startOnMount = useCallback((el: HTMLVideoElement | null) => {
+    if (!el) return;
+    el.play().catch(() => {
+      // Sound-on autoplay refused (e.g. Safari power saving): retry muted rather than sit at 0:00.
+      el.muted = true;
+      el.play().catch(() => {});
+    });
+  }, []);
+
+  const play = () => setPlaying(true);
 
   return (
     <figure
@@ -48,8 +62,34 @@ export function VideoPlayer({
         className,
       )}
     >
-      {playing ? (
-        <video ref={ref} src={src} poster={poster} controls playsInline className="absolute inset-0 size-full object-cover" title={title} />
+      {playing && unsupported ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/70 p-6 text-center text-white">
+          <p className="text-body-medium max-w-sm text-white/80">This video couldn&apos;t load here.</p>
+          <a
+            href={src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-body-medium text-neutral-950"
+          >
+            Open video in a new tab
+            <RiExternalLinkLine className="size-4" aria-hidden />
+          </a>
+        </div>
+      ) : playing ? (
+        <video
+          ref={startOnMount}
+          poster={poster}
+          controls
+          autoPlay
+          playsInline
+          preload="auto"
+          className="absolute inset-0 size-full object-cover"
+          title={title}
+        >
+          {webm ? <source src={webm} type="video/webm" /> : null}
+          {/* With <source> children, load failures fire on the source, not the video. */}
+          <source src={src} type="video/mp4" onError={() => setUnsupported(true)} />
+        </video>
       ) : (
         <button
           type="button"
