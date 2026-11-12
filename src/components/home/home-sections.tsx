@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   RiArrowRightLine,
   RiCheckLine,
@@ -7,6 +6,7 @@ import {
 import { Accent, Container, Section, SectionHeading } from "@/components/site/section";
 import { StatGrid } from "@/components/site/blocks";
 import { DifferentiatorsBento } from "@/components/home/differentiators-bento";
+import { WhyBento } from "@/components/home/why-bento";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/motion";
 import { Cta } from "@/components/site/cta";
 import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
@@ -213,39 +213,9 @@ const REASONS = [
 
 export function WhyChoose() {
   return (
-    <Section tone="sunken" id="why">
-      <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <SectionHeading
-            eyebrow="Why Identyca"
-            title={
-              <>
-                Four reasons teams <Accent>switch</Accent>.
-              </>
-            }
-            lead="Why forward-thinking event organizers, venues and vendors choose our platform."
-          />
-        </div>
-        <Stagger as="ol" className="flex flex-col">
-          {REASONS.map((r, i) => (
-            <StaggerItem as="li" key={r.title} className="group border-t border-border-hairline-strong py-8 first:border-t-0 first:pt-0 sm:py-10">
-              <div className="flex gap-6">
-                <span className="font-mono text-caption-1-medium text-text-tertiary">{String(i + 1).padStart(2, "0")}</span>
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-subsection text-text-primary">{r.title}</h3>
-                  <p className="text-body-regular max-w-xl leading-6 text-text-secondary">{r.body}</p>
-                  <Link
-                    href={r.link.href}
-                    className="group/l mt-1 inline-flex w-fit items-center gap-1 text-body-medium text-signal outline-none focus-visible:underline"
-                  >
-                    {r.link.label}
-                    <RiArrowRightLine className="size-4 transition-transform duration-200 group-hover/l:translate-x-0.5" aria-hidden />
-                  </Link>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
+    <Section id="why">
+      <Container>
+        <WhyBento reasons={REASONS} demoHref={DEMO_HREF} />
       </Container>
     </Section>
   );

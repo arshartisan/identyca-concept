@@ -472,3 +472,21 @@ body {
     scrollbar-color: rgb(255 255 255 / 0.2) transparent;
   }
 }
+
+/* Why Identyca line-art bento ---------------------------------------------- */
+.why-coil {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: why-coil 3.6s ease-in-out infinite;
+}
+.why-float {
+  animation: why-float 6s ease-in-out infinite;
+}
+@keyframes why-coil {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.8); }
+}
+@keyframes why-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
