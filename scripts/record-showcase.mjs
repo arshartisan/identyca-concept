@@ -29,7 +29,7 @@ const arg = (name, fallback) => {
 };
 const URL_ = arg("url", "https://identyca-concept.vercel.app/");
 const OUT = path.resolve(arg("out", "showcase"));
-const ONLY = arg("only", "all"); // all | desktop | desktop-zoom | mobile
+const ONLY = arg("only", "all"); // all | desktop | desktop-zoom | desktop-angled | mobile
 const FPS = Number(arg("fps", "90"));
 const QUALITY = Number(arg("quality", "92")); // JPEG quality of captured frames
 
@@ -93,6 +93,42 @@ const DESKTOP_ZOOM = {
   ],
 };
 
+// Cinematic cut: close-ups tilt in 3D (perspective rotateX/rotateY about the
+// target) and orbit slowly while holding. Rendered supersampled (2x pixel
+// density) and written as two masters: 4K, and a Lanczos-downscaled 1080p.
+const DESKTOP_ANGLED = {
+  name: "desktop-angled",
+  masters: true,
+  context: { viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2 },
+  steps: [
+    { hold: 1.6 }, // hero: dot-matrix boot
+    { zoom: "hero-logo", z: 1.7, tilt: { x: 14, y: -18 }, dur: 1.6 },
+    { hold: 1.4, drift: { x: 10, y: -7 } },
+    { unzoom: true, dur: 1.1 },
+    { scroll: "#products", offset: 96, dur: 1.4 },
+    { zoom: "product-rt", z: 1.7, tilt: { x: 12, y: 16 }, dur: 1.2 },
+    { hold: 0.8, drift: { x: 10, y: 9 } },
+    { pan: "product-ei", tilt: { x: 12, y: -12 }, dur: 1.0 },
+    { hold: 0.7, drift: { x: 9, y: -6 } },
+    { unzoom: true, dur: 0.9 },
+    { scroll: "#different", offset: 72, dur: 1.4 },
+    { zoom: "bento-eco", z: 1.8, tilt: { x: 16, y: -16 }, dur: 1.2 },
+    { hold: 1.0, drift: { x: 12, y: -8 } },
+    { pan: "bento-roi", tilt: { x: 14, y: 14 }, dur: 1.1 },
+    { hold: 0.8, drift: { x: 10, y: 8 } },
+    { unzoom: true, dur: 0.9 },
+    { scroll: "#why", offset: 72, dur: 1.4 },
+    { zoom: "why-roi", z: 1.7, tilt: { x: 12, y: 18 }, dur: 1.1 },
+    { hold: 0.8, drift: { x: 9, y: 10 } },
+    { pan: "why-stage", tilt: { x: 12, y: -12 }, dur: 1.0 },
+    { hold: 0.6, drift: { x: 9, y: -6 } },
+    { unzoom: true, dur: 0.8 },
+    { scroll: "bottom", dur: 1.6 },
+    { zoom: "footer-scene", z: 1.5, tilt: { x: 20, y: -10 }, dur: 1.3 },
+    { hold: 1.8, drift: { x: 16, y: 4 } },
+  ],
+};
+
 const MOBILE = {
   name: "mobile",
   // 360 x 640 CSS px at 3x -> 1080 x 1920 vertical video
@@ -141,11 +177,12 @@ function installTimeSync() {
       body.style.transform = prev;
       return r ? { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY } : null;
     },
-    // Camera: scale z about focus (fx, fy); w in [0,1] slides the focus to viewport centre.
-    camera(fx, fy, z, w) {
+    // Camera: scale z about focus (fx, fy); w in [0,1] slides the focus to viewport centre;
+    // rx/ry tilt the page in 3D about the focus (vanishing point on the target).
+    camera(fx, fy, z, w, rx = 0, ry = 0) {
       const body = document.body;
       const header = document.querySelector("header");
-      if (z < 1.0005 && w < 0.0005) {
+      if (z < 1.0005 && w < 0.0005 && Math.abs(rx) < 0.01 && Math.abs(ry) < 0.01) {
         body.style.transform = "";
         body.style.transformOrigin = "";
         if (header) header.style.opacity = "";
@@ -154,9 +191,10 @@ function installTimeSync() {
       const tx = (innerWidth / 2 - fx) * w;
       const ty = (scrollY + innerHeight / 2 - fy) * w;
       body.style.transformOrigin = `${fx}px ${fy}px`;
-      body.style.transform = `translate(${tx}px, ${ty}px) scale(${z})`;
+      const tilt = rx || ry ? ` perspective(1800px) rotateX(${rx}deg) rotateY(${ry}deg)` : "";
+      body.style.transform = `translate(${tx}px, ${ty}px)${tilt} scale(${z})`;
       // the fixed header would ride along inside the transformed body: fade it for close-ups
-      if (header) header.style.opacity = String(Math.max(0, 1 - (z - 1) / 0.12));
+      if (header) header.style.opacity = String(Math.max(0, 1 - Math.max((z - 1) / 0.12, w * 4)));
     },
     sync() {
       const now = performance.now();
@@ -186,17 +224,19 @@ function installTimeSync() {
 
 const smootherstep = (x) => x * x * x * (x * (x * 6 - 15) + 10);
 
-function startEncoder(file) {
-  const ff = spawn(
-    ffmpegPath,
-    [
-      "-y", "-loglevel", "error",
-      "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
-      "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-pix_fmt", "yuv420p",
-      "-r", String(FPS), "-movflags", "+faststart", file,
-    ],
-    { stdio: ["pipe", "inherit", "inherit"] },
-  );
+function startEncoder(file, masters = false) {
+  const x264 = (crf, level) => ["-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-level", level, "-crf", String(crf), "-pix_fmt", "yuv420p", "-r", String(FPS), "-movflags", "+faststart"];
+  const input = ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-"];
+  const args = masters
+    ? [
+        ...input,
+        // one pass, two masters: the supersampled 4K frames, and a Lanczos downscale to 1080p
+        "-filter_complex", "[0:v]split=2[uhd][src];[src]scale=1920:1080:flags=lanczos[hd]",
+        "-map", "[uhd]", ...x264(15, "5.2"), file.replace(/\.mp4$/, "-4k.mp4"),
+        "-map", "[hd]", ...x264(15, "4.2"), file.replace(/\.mp4$/, "-1080p.mp4"),
+      ]
+    : [...input, ...x264(16, "4.2"), file];
+  const ff = spawn(ffmpegPath, args, { stdio: ["pipe", "inherit", "inherit"] });
   return {
     async write(buf) {
       if (!ff.stdin.write(buf)) await once(ff.stdin, "drain");
@@ -241,7 +281,7 @@ async function render(browser, spec) {
   });
   await page.mouse.move(spec.context.viewport.width - 4, spec.context.viewport.height - 4);
 
-  const enc = startEncoder(file);
+  const enc = startEncoder(file, spec.masters);
   let frames = 0;
   let elapsedMs = 0;
 
@@ -251,12 +291,13 @@ async function render(browser, spec) {
     await page.clock.runFor(target - elapsedMs);
     elapsedMs = target;
     await page.evaluate(() => window.__showcase.sync());
-    await enc.write(await page.screenshot({ type: "jpeg", quality: QUALITY, caret: "hide" }));
+    await enc.write(await page.screenshot({ type: "jpeg", quality: spec.masters ? Math.max(QUALITY, 95) : QUALITY, caret: "hide" }));
     if (frames % FPS === 0) process.stdout.write(`\r  ${spec.name}: ${frames / FPS}s rendered`);
   };
 
   // camera at rest: 1x, focus unused (w = 0 means no translation)
-  let cam = { fx: 0, fy: 0, z: 1, w: 0 };
+  let cam = { fx: 0, fy: 0, z: 1, w: 0, rx: 0, ry: 0 };
+  const applyCam = () => page.evaluate((c) => window.__showcase.camera(c.fx, c.fy, c.z, c.w, c.rx, c.ry), cam);
 
   for (const step of spec.steps) {
     if (step.click) {
@@ -269,6 +310,7 @@ async function render(browser, spec) {
     }
     if (step.hold) {
       const n = Math.round(step.hold * FPS);
+      const drift = step.drift && cam.w > 0 ? { from: { rx: cam.rx, ry: cam.ry }, to: { rx: step.drift.x, ry: step.drift.y } } : null;
       let box = null;
       if (step.mouse) box = await page.locator(step.mouse.over).first().boundingBox();
       for (let i = 0; i < n; i++) {
@@ -282,6 +324,11 @@ async function render(browser, spec) {
           const fy = p[k][1] + (p[k + 1][1] - p[k][1]) * f;
           await page.mouse.move(box.x + box.width * fx, box.y + box.height * fy);
         }
+        if (drift) {
+          const e = smootherstep((i + 1) / n);
+          cam = { ...cam, rx: drift.from.rx + (drift.to.rx - drift.from.rx) * e, ry: drift.from.ry + (drift.to.ry - drift.from.ry) * e };
+          await applyCam();
+        }
         await frame();
       }
       if (box) await page.mouse.move(spec.context.viewport.width - 4, spec.context.viewport.height - 4);
@@ -290,7 +337,7 @@ async function render(browser, spec) {
     if (step.zoom || step.pan || step.unzoom) {
       const vw = spec.context.viewport.width;
       let to = cam;
-      if (step.unzoom) to = { ...cam, z: 1, w: 0 };
+      if (step.unzoom) to = { ...cam, z: 1, w: 0, rx: 0, ry: 0 };
       else {
         const t = await page.evaluate((n) => window.__showcase.target(n), step.zoom ?? step.pan);
         if (!t) {
@@ -304,10 +351,10 @@ async function render(browser, spec) {
         const z = step.zoom ? step.z : cam.z;
         // keep the zoomed view inside the page horizontally (no blank margins)
         const half = vw / (2 * z);
-        to = { fx: Math.min(vw - half, Math.max(half, t.x)), fy: t.y, z, w: 1 };
+        to = { fx: Math.min(vw - half, Math.max(half, t.x)), fy: t.y, z, w: 1, rx: step.tilt?.x ?? cam.rx, ry: step.tilt?.y ?? cam.ry };
       }
       // zooming out keeps the focus where it is; zooming in from rest starts on the target
-      const from = cam.w === 0 && step.zoom ? { ...to, z: 1, w: 0 } : cam;
+      const from = cam.w === 0 && step.zoom ? { ...to, z: 1, w: 0, rx: 0, ry: 0 } : cam;
       if (step.unzoom) to = { ...to, fx: from.fx, fy: from.fy };
       const n = Math.round(step.dur * FPS);
       for (let i = 1; i <= n; i++) {
@@ -317,8 +364,10 @@ async function render(browser, spec) {
           fy: from.fy + (to.fy - from.fy) * e,
           z: from.z * Math.pow(to.z / from.z, e), // geometric: constant-speed feel
           w: from.w + (to.w - from.w) * e,
+          rx: from.rx + (to.rx - from.rx) * e,
+          ry: from.ry + (to.ry - from.ry) * e,
         };
-        await page.evaluate((c) => window.__showcase.camera(c.fx, c.fy, c.z, c.w), cam);
+        await applyCam();
         await frame();
       }
       continue;
@@ -360,6 +409,7 @@ console.log(`Recording ${URL_} at ${FPS} fps`);
 try {
   if (ONLY === "all" || ONLY === "desktop") await render(browser, DESKTOP);
   if (ONLY === "all" || ONLY === "desktop-zoom") await render(browser, DESKTOP_ZOOM);
+  if (ONLY === "all" || ONLY === "desktop-angled") await render(browser, DESKTOP_ANGLED);
   if (ONLY === "all" || ONLY === "mobile") await render(browser, MOBILE);
 } finally {
   await browser.close();
