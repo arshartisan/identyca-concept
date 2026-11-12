@@ -168,32 +168,64 @@ function installTimeSync() {
   const starts = new WeakMap();
   window.__showcase = {
     // Centre of a [data-shot] target in document coords, measured with the camera off.
+    // Close-ups magnify with CSS `zoom` (real layout zoom), not transform: scale().
+    // A scaled 3D-transformed layer is rasterised at 1x and then stretched, which
+    // pixelates text; zoomed layout is rasterised at full size. The body's layout
+    // width is pinned so zoom magnifies the desktop layout instead of reflowing it,
+    // and lengths set on the zoomed body (translate, perspective) are multiplied by
+    // the zoom, so they are divided by it here.
+    _rest: null,
+    _clear() {
+      const body = document.body;
+      body.style.zoom = "";
+      body.style.width = "";
+      body.style.transform = "";
+      body.style.transformOrigin = "";
+    },
+    // Centre of a [data-shot] target in document coords, measured with the camera off.
     target(name) {
       const body = document.body;
-      const prev = body.style.transform;
-      body.style.transform = "";
+      const saved = { zoom: body.style.zoom, width: body.style.width, transform: body.style.transform, origin: body.style.transformOrigin };
+      const S = this._rest ?? scrollY;
+      this._clear();
+      scrollTo(0, S);
       const el = document.querySelector(`[data-shot="${name}"]`);
       const r = el ? el.getBoundingClientRect() : null;
-      body.style.transform = prev;
-      return r ? { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY } : null;
+      const out = r ? { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY } : null;
+      Object.assign(body.style, { zoom: saved.zoom, width: saved.width, transform: saved.transform, transformOrigin: saved.origin });
+      if (this._rest != null) scrollTo(0, this._rest);
+      return out;
     },
-    // Camera: scale z about focus (fx, fy); w in [0,1] slides the focus to viewport centre;
-    // rx/ry tilt the page in 3D about the focus (vanishing point on the target).
+    // Camera: magnify z about focus (fx, fy) in document coords; w in [0,1] slides the
+    // focus from where it sits on screen to the viewport centre; rx/ry tilt the page in
+    // 3D about the focus (vanishing point on the target).
     camera(fx, fy, z, w, rx = 0, ry = 0) {
       const body = document.body;
       const header = document.querySelector("header");
       if (z < 1.0005 && w < 0.0005 && Math.abs(rx) < 0.01 && Math.abs(ry) < 0.01) {
-        body.style.transform = "";
-        body.style.transformOrigin = "";
+        this._clear();
+        if (this._rest != null) scrollTo(0, this._rest);
+        this._rest = null;
         if (header) header.style.opacity = "";
         return;
       }
-      const tx = (innerWidth / 2 - fx) * w;
-      const ty = (scrollY + innerHeight / 2 - fy) * w;
+      if (this._rest == null) {
+        this._rest = scrollY; // scroll stays fixed for the whole close-up
+        document.documentElement.style.overflowAnchor = "none";
+      }
+      const S = this._rest;
+      body.style.width = `${innerWidth}px`;
+      body.style.zoom = String(z);
+      scrollTo(0, S);
+      // where the focus sits at rest, slid towards the viewport centre by w
+      const dx = fx + (innerWidth / 2 - fx) * w;
+      const dy = fy - S + (innerHeight / 2 - (fy - S)) * w;
+      const tx = dx - fx * z;
+      const ty = dy - (fy * z - S);
       body.style.transformOrigin = `${fx}px ${fy}px`;
-      const tilt = rx || ry ? ` perspective(1800px) rotateX(${rx}deg) rotateY(${ry}deg)` : "";
-      body.style.transform = `translate(${tx}px, ${ty}px)${tilt} scale(${z})`;
-      // the fixed header would ride along inside the transformed body: fade it for close-ups
+      const tilt = rx || ry ? ` perspective(${(1800 / z).toFixed(2)}px) rotateX(${rx}deg) rotateY(${ry}deg)` : "";
+      body.style.transform = `translate(${(tx / z).toFixed(3)}px, ${(ty / z).toFixed(3)}px)${tilt}`;
+      // the fixed header would ride along inside the zoomed body: fade it for close-ups
       if (header) header.style.opacity = String(Math.max(0, 1 - Math.max((z - 1) / 0.12, w * 4)));
     },
     sync() {
