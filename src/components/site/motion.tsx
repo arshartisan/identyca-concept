@@ -62,14 +62,20 @@ export function Stagger({
   gap = 0.08,
   delay = 0,
   as = "div",
-  amount = 0.2,
+  amount = "some",
 }: {
   children: ReactNode;
   className?: string;
   gap?: number;
   delay?: number;
   as?: Tag;
-  amount?: number;
+  /**
+   * Defaults to "some" (any pixel), not a fraction: grids stack into very tall
+   * columns on phones (the bento is ~3000px), so a fractional threshold left
+   * visitors scrolling through empty space. The bottom margin still makes the
+   * stagger play inside the viewport rather than below the fold.
+   */
+  amount?: number | "some" | "all";
 }) {
   const Comp = motion[as] as typeof motion.div;
   return (
@@ -77,7 +83,7 @@ export function Stagger({
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount }}
+      viewport={{ once: true, amount, margin: "0px 0px -12% 0px" }}
       variants={{ hidden: {}, show: { transition: { staggerChildren: gap, delayChildren: delay } } }}
     >
       {children}
