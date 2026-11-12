@@ -1,0 +1,198 @@
+/* ---------------------------------------------------------------------------
+ * Identyca brand layer — sits on top of BoardUI (imported after globals.css).
+ *
+ *  - Swaps the family to Manrope (sans) + Instrument Serif (display accents)
+ *  - Adds fluid marketing type utilities (BoardUI's ramp stops at 64px)
+ *  - Warms the light page ground to "paper", deepens the dark one to "ink"
+ *  - Adds a handful of semantic marketing tokens (hairline, grid, signal)
+ *
+ * Every colour here is a semantic token, so sections can flip to dark simply
+ * by carrying the `.dark` class (see <Section tone="ink">).
+ * --------------------------------------------------------------------------- */
+
+@theme {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Iowan Old Style", Georgia, serif;
+
+  /* Fluid marketing ramp ---------------------------------------------------- */
+  --text-hero: clamp(2.75rem, 1.6rem + 5.4vw, 6.25rem);
+  --text-hero--line-height: 0.98;
+  --text-hero--letter-spacing: -0.045em;
+  --text-hero--font-weight: 600;
+
+  --text-section: clamp(2.125rem, 1.45rem + 3vw, 4rem);
+  --text-section--line-height: 1.04;
+  --text-section--letter-spacing: -0.04em;
+  --text-section--font-weight: 600;
+
+  --text-subsection: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-subsection--line-height: 1.12;
+  --text-subsection--letter-spacing: -0.03em;
+  --text-subsection--font-weight: 600;
+
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem);
+  --text-lead--line-height: 1.55;
+  --text-lead--letter-spacing: -0.012em;
+  --text-lead--font-weight: 400;
+
+  --text-stat: clamp(2.5rem, 1.9rem + 2.6vw, 4.25rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.05em;
+  --text-stat--font-weight: 500;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1rem;
+  --text-eyebrow--letter-spacing: 0.08em;
+  --text-eyebrow--font-weight: 500;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-sweep: sweep 4.5s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-shimmer: shimmer 3.2s linear infinite;
+}
+
+/* Light (paper) */
+:root {
+  --color-background-full: #fbfaf7;
+  --color-background-sunken: #f4f2ec;
+  --color-background-elevated: #ffffff;
+  --color-border-hairline: rgb(17 17 17 / 0.08);
+  --color-border-hairline-strong: rgb(17 17 17 / 0.14);
+  --color-grid-line: rgb(17 17 17 / 0.045);
+  --color-signal: var(--color-blue-600);
+  --color-signal-soft: color-mix(in oklab, var(--color-blue-500) 12%, transparent);
+  --color-signal-glow: color-mix(in oklab, var(--color-blue-500) 35%, transparent);
+  --color-warm: #ff6a2b;
+  --color-warm-soft: color-mix(in oklab, #ff6a2b 12%, transparent);
+  --color-positive: var(--color-emerald-600);
+  --color-text-on-ink: #f6f5f1;
+  --color-surface-ink: #0b0b0c;
+}
+
+/* Dark (ink) — whole-page dark mode and `.dark` sections */
+.dark {
+  --color-background-full: #0a0a0b;
+  --color-background-sunken: #0f0f11;
+  --color-background-elevated: #141416;
+  --color-border-hairline: rgb(255 255 255 / 0.08);
+  --color-border-hairline-strong: rgb(255 255 255 / 0.14);
+  --color-grid-line: rgb(255 255 255 / 0.05);
+  --color-signal: var(--color-blue-400);
+  --color-signal-soft: color-mix(in oklab, var(--color-blue-400) 16%, transparent);
+  --color-signal-glow: color-mix(in oklab, var(--color-blue-400) 45%, transparent);
+  --color-warm-soft: color-mix(in oklab, #ff6a2b 18%, transparent);
+  --color-positive: var(--color-emerald-400);
+}
+
+@theme inline {
+  --color-background-sunken: var(--color-background-sunken);
+  --color-background-elevated: var(--color-background-elevated);
+  --color-border-hairline: var(--color-border-hairline);
+  --color-border-hairline-strong: var(--color-border-hairline-strong);
+  --color-grid-line: var(--color-grid-line);
+  --color-signal: var(--color-signal);
+  --color-signal-soft: var(--color-signal-soft);
+  --color-signal-glow: var(--color-signal-glow);
+  --color-warm: var(--color-warm);
+  --color-warm-soft: var(--color-warm-soft);
+  --color-positive: var(--color-positive);
+}
+
+/* Utilities ----------------------------------------------------------------- */
+
+/* Serif italic accent words inside sans headlines */
+@utility font-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: var(--text-eyebrow--font-weight);
+  text-transform: uppercase;
+}
+
+/* Graph-paper backdrop used behind heroes */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility mask-fade-y {
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@utility mask-radial {
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 72%);
+}
+
+@utility text-balance-pretty {
+  text-wrap: balance;
+}
+
+/* Keyframes ----------------------------------------------------------------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to { background-position: -100% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-sweep,
+  .animate-pulse-ring,
+  .animate-float,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
+
+/* Base ---------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  background: var(--color-background-full);
+  color: var(--color-text-primary);
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: var(--color-signal-glow);
+}
+:target {
+  scroll-margin-top: 96px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,3 @@
+/* App stylesheet entry: BoardUI foundations, then the Identyca brand layer. */
+@import "./globals.css";
+@import "./brand.css";
