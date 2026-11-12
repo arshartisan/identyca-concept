@@ -15,7 +15,7 @@ const POINTS = [
   {
     icon: RiCalendarCheckLine,
     title: "A 20-minute walkthrough",
-    body: "Tailored to your role — organizer, venue or vendor. No slides. No sales pitch. Just the product.",
+    body: "Tailored to your role - organizer, venue or vendor. No slides. No sales pitch. Just the product.",
   },
   {
     icon: RiRocket2Line,
@@ -71,7 +71,7 @@ export default function DemoPage() {
           </Reveal>
         </div>
         <Reveal delay={0.1}>
-          <Card className="p-6 sm:p-10">
+          <Card glow={false} className="p-6 sm:p-10">
             <LeadForm />
           </Card>
         </Reveal>

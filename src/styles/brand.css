@@ -268,3 +268,68 @@ body {
 .button-glow[aria-disabled="true"] {
   filter: none;
 }
+
+/* Border glow (components/foundations/border-glow) ---------------------------
+ * Driven by --glow-angle / --glow-border / --glow-outer, which the component
+ * writes on pointer move. Layers sit above the wrapped card, never take input. */
+.border-glow {
+  --glow-angle: 45deg;
+  --glow-border: 0;
+  --glow-outer: 0;
+}
+.border-glow-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 0.75s ease-in-out;
+}
+.border-glow[data-glow="on"] .border-glow-layer {
+  transition: opacity 0.25s ease-out;
+}
+/* 1px mesh ring, shown in a cone facing the cursor: cone ∩ (box − content box) */
+.border-glow-ring {
+  padding: 1px;
+  background: var(--glow-mesh);
+  opacity: var(--glow-border);
+  --cone: conic-gradient(from var(--glow-angle) at center, #000 var(--glow-cone-a), transparent var(--glow-cone-b), transparent var(--glow-cone-c), #000 var(--glow-cone-d));
+  -webkit-mask: var(--cone), linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: source-in, xor, source-over;
+  mask: var(--cone), linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: intersect, exclude, add;
+}
+/* Soft-light mesh tint hugging the inner edge */
+.border-glow-fill {
+  border: 1px solid transparent;
+  background: var(--glow-mesh);
+  background-origin: padding-box;
+  opacity: calc(var(--glow-border) * var(--glow-fill));
+  mix-blend-mode: soft-light;
+  --edge-mask:
+    linear-gradient(to bottom, #000, #000),
+    radial-gradient(ellipse at 50% 50%, #000 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, #000 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, #000 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, #000 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, #000 5%, transparent 40%),
+    conic-gradient(from var(--glow-angle) at center, transparent 5%, #000 15%, #000 85%, transparent 95%);
+  -webkit-mask-image: var(--edge-mask);
+  -webkit-mask-composite: source-out, source-over, source-over, source-over, source-over, source-over;
+  mask-image: var(--edge-mask);
+  mask-composite: subtract, add, add, add, add, add;
+}
+/* Bloom: box-shadow stack, revealed in a narrow cone */
+.border-glow-bloom {
+  inset: calc(-1 * var(--glow-radius));
+  opacity: var(--glow-outer);
+  mix-blend-mode: plus-lighter;
+  --bloom-cone: conic-gradient(from var(--glow-angle) at center, #000 2.5%, transparent 10%, transparent 90%, #000 97.5%);
+  -webkit-mask-image: var(--bloom-cone);
+  mask-image: var(--bloom-cone);
+}
+.border-glow-bloom > span {
+  position: absolute;
+  inset: var(--glow-radius);
+  border-radius: inherit;
+}

@@ -125,7 +125,7 @@ export function FormSection({
   className?: string;
 }) {
   return (
-    <Card className={cx("p-5 sm:p-7", className)}>
+    <Card glow={false} className={cx("p-5 sm:p-7", className)}>
       <header className="mb-6 flex items-start gap-4">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-border-hairline bg-background-full text-foreground-icon-primary">
           {Icon ? <Icon className="size-5" aria-hidden /> : <span className="font-mono text-caption-1-medium">{index}</span>}

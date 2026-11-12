@@ -9,6 +9,7 @@ import {
   RiArticleLine,
 } from "@remixicon/react";
 import { cx } from "@/utils/cx";
+import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
 import type { PostSummary } from "@/lib/posts";
 
 const CATEGORY_ICON: Record<string, RemixiconComponentType> = {
@@ -106,6 +107,7 @@ export function PostCard({ post, index }: { post: PostSummary; index: number }) 
 
 export function FeaturedPost({ post, index }: { post: PostSummary; index: number }) {
   return (
+    <BorderGlow radius={28}>
     <Link
       href={`/insights/${post.slug}`}
       className={cx(
@@ -130,5 +132,6 @@ export function FeaturedPost({ post, index }: { post: PostSummary; index: number
         </div>
       </div>
     </Link>
+    </BorderGlow>
   );
 }

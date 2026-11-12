@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { cx } from "@/utils/cx";
 import { Reveal } from "./motion";
+import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
 
 export function Container({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cx("mx-auto w-full max-w-[1200px] px-5 sm:px-8", className)}>{children}</div>;
@@ -8,7 +9,7 @@ export function Container({ children, className }: { children: ReactNode; classN
 
 /**
  * Page section. `tone="ink"` renders a dark band by scoping BoardUI's `.dark`
- * tokens to the section — no hard-coded colours needed.
+ * tokens to the section - no hard-coded colours needed.
  */
 export function Section({
   children,
@@ -94,9 +95,9 @@ export function Accent({ children, className }: { children: ReactNode; className
   return <em className={cx("font-accent", className)}>{children}</em>;
 }
 
-/** Hairline-bordered surface card. */
-export function Card({ children, className }: { children: ReactNode; className?: string }) {
-  return (
+/** Hairline-bordered surface card with the cursor-tracking edge glow (`glow={false}` for form panels). */
+export function Card({ children, className, glow = true }: { children: ReactNode; className?: string; glow?: boolean }) {
+  const card = (
     <div
       className={cx(
         "relative rounded-3xl border border-border-hairline bg-background-elevated",
@@ -107,4 +108,7 @@ export function Card({ children, className }: { children: ReactNode; className?:
       {children}
     </div>
   );
+  if (!glow) return card;
+  // The wrapper owns the grid cell, so it must stretch whenever the card does.
+  return <BorderGlow className={cx(/h-full/.test(className ?? "") && "h-full")}>{card}</BorderGlow>;
 }

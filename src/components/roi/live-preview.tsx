@@ -112,7 +112,7 @@ export function LivePreview({
   /** Baseline scenario result. */
   result: RoiResult;
   onGenerate: () => void;
-  /** Email the report was sent to — replaces the CTA with a confirmation. */
+  /** Email the report was sent to - replaces the CTA with a confirmation. */
   sentTo: string | null;
 }) {
   const reduce = useReducedMotion();
@@ -121,7 +121,7 @@ export function LivePreview({
   const speedup = r.searchWith !== null && r.searchWithout > 0 ? Math.round((1 - r.searchWith / r.searchWithout) * 100) : 0;
 
   return (
-    <Card className="overflow-hidden">
+    <Card glow={false} className="overflow-hidden">
       <div aria-hidden className="bg-grid mask-radial pointer-events-none absolute inset-x-0 top-0 h-40 opacity-60" />
       <div className="relative flex flex-col gap-5 p-5 sm:p-7">
         <header className="flex items-start justify-between gap-3">
@@ -247,7 +247,7 @@ export function LivePreview({
             </motion.div>
           ) : (
             <motion.div key="cta" exit={{ opacity: 0, transition: { duration: 0.15 } }} className="flex flex-col gap-2">
-              <Button onClick={onGenerate} leadingIcon={RiFileChartLine} className="h-12 w-full rounded-full text-headline-medium">
+              <Button variant="glow" onClick={onGenerate} leadingIcon={RiFileChartLine} className="h-12 w-full rounded-full text-headline-medium">
                 Generate my ROI report
               </Button>
               <p className="text-center text-caption-1-medium text-text-tertiary">
