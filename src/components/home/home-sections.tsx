@@ -3,17 +3,13 @@ import {
   RiArrowRightLine,
   RiCheckLine,
   RiCloseLine,
-  RiEyeOffLine,
-  RiHome4Line,
-  RiLineChartLine,
-  RiNodeTree,
-  RiSparkling2Line,
-  RiUserLocationLine,
 } from "@remixicon/react";
 import { Accent, Container, Section, SectionHeading } from "@/components/site/section";
-import { FeatureGrid, StatGrid } from "@/components/site/blocks";
+import { StatGrid } from "@/components/site/blocks";
+import { DifferentiatorsBento } from "@/components/home/differentiators-bento";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/motion";
 import { Cta } from "@/components/site/cta";
+import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
 import { VideoPlayer, VIDEOS } from "@/components/site/video-player";
 import { DEMO_HREF } from "@/lib/site";
 
@@ -25,13 +21,13 @@ export function ExplainerVideos() {
       <Container>
         <Stagger className="grid gap-4 md:grid-cols-2">
           <StaggerItem>
-            <VideoPlayer src={VIDEOS.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time — product explainer" />
+            <VideoPlayer src={VIDEOS.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time - product explainer" />
           </StaggerItem>
           <StaggerItem>
             <VideoPlayer
               src={VIDEOS.intelligence}
               poster="/images/poster-eivid-v2.jpg"
-              title="Identyca Event Intelligence — product explainer"
+              title="Identyca Event Intelligence - product explainer"
             />
           </StaggerItem>
         </Stagger>
@@ -44,9 +40,11 @@ export function ExplainerVideos() {
 
 export function Differentiators() {
   return (
-    <Section id="different">
-      <Container>
+    <Section tone="ink" id="different" className="overflow-hidden">
+      <div aria-hidden className="absolute -top-40 start-1/2 h-96 w-[720px] -translate-x-1/2 rounded-full bg-signal-glow opacity-25 blur-[120px]" />
+      <Container className="relative">
         <SectionHeading
+          align="center"
           eyebrow="Our differentiators"
           title={
             <>
@@ -55,41 +53,7 @@ export function Differentiators() {
           }
           lead="We didn't just build another event app."
         />
-        <FeatureGrid
-          className="mt-14"
-          items={[
-            {
-              icon: RiUserLocationLine,
-              title: "Spatial-first, not app-first",
-              body: "Every other networking tool asks people to pull out a phone and scan. Identyca maps identities in space — ambient and zero friction on the event floor.",
-            },
-            {
-              icon: RiSparkling2Line,
-              title: "AI that plans, not just recommends",
-              body: "Event Intelligence ingests your event brief and returns a ranked, fit-scored shortlist of sponsors, speakers and venues — ready to act on.",
-            },
-            {
-              icon: RiHome4Line,
-              title: "Venue-permanent, not event-disposable",
-              body: "Identyca Spaces is installed once and lives in the building. Every event the venue hosts activates the layer — no reinstall, no per-event hardware cost.",
-            },
-            {
-              icon: RiLineChartLine,
-              title: "Built for organizer + sponsor ROI",
-              body: "Deploy at zero net cost — or at a profit — by reselling smart glass access and analytics add-ons. Sponsors see 3–5× more qualified conversations.",
-            },
-            {
-              icon: RiEyeOffLine,
-              title: "Privacy by architecture",
-              body: "Zero facial recognition. All identity is opt-in via smart badge. Attendees control their own visibility at all times.",
-            },
-            {
-              icon: RiNodeTree,
-              title: "One ecosystem. Three products.",
-              body: "Run all three and every stage — pre-event planning, event floor, venue layer — is unified in one data model.",
-            },
-          ]}
-        />
+        <DifferentiatorsBento className="mt-14" />
       </Container>
     </Section>
   );
@@ -124,7 +88,7 @@ export function Numbers() {
           stats={[
             { value: 4.2, decimals: 1, suffix: "×", label: "More qualified networking connections vs. unaided floor networking" },
             { value: 12, suffix: " min", label: "Average time to generate a full AI sponsor + speaker shortlist" },
-            { value: 80, prefix: "<", suffix: " cm", label: "Positioning accuracy inside venues — 99% of fixes inside 1 m" },
+            { value: 80, prefix: "<", suffix: " cm", label: "Positioning accuracy inside venues - 99% of fixes inside 1 m" },
             { value: 100, suffix: "%", label: "Platform cost that can be offset by reselling smart glass access and analytics" },
           ]}
         />
@@ -136,19 +100,19 @@ export function Numbers() {
 /* ------------------------------------------------------------ Comparison */
 
 const ROWS: [string, string, string, string][] = [
-  ["Real-time attendee location", "30–50 cm accuracy", "—", "—"],
-  ["Hands-free networking overlay", "AR + mobile app", "QR scan only", "—"],
-  ["AI sponsor matching", "Fit-scored shortlist", "—", "Manual research"],
-  ["Indoor wayfinding", "Turn-by-turn via beacons", "Static floor maps only", "—"],
-  ["Crowd density and zone analytics", "Real-time by zone", "—", "—"],
+  ["Real-time attendee location", "30–50 cm accuracy", "-", "-"],
+  ["Hands-free networking overlay", "AR + mobile app", "QR scan only", "-"],
+  ["AI sponsor matching", "Fit-scored shortlist", "-", "Manual research"],
+  ["Indoor wayfinding", "Turn-by-turn via beacons", "Static floor maps only", "-"],
+  ["Crowd density and zone analytics", "Real-time by zone", "-", "-"],
   ["Sponsor booth traffic and dwell data", "Live + post-event", "Post-event only", "Manual count"],
-  ["Speaker and venue discovery", "AI recommendations", "—", "Manual directories"],
-  ["Permanent venue intelligence layer", "Identyca Spaces", "Per-event only", "—"],
+  ["Speaker and venue discovery", "AI recommendations", "-", "Manual directories"],
+  ["Permanent venue intelligence layer", "Identyca Spaces", "Per-event only", "-"],
   ["Zero per-event hardware reinstall", "Install once, reuse forever", "Reinstall every event", "N/A"],
 ];
 
 function Cell({ v }: { v: string }) {
-  if (v === "—")
+  if (v === "-")
     return (
       <span className="inline-flex items-center gap-1.5 text-text-tertiary">
         <RiCloseLine className="size-4" aria-hidden />
@@ -226,17 +190,17 @@ export function Comparison() {
 const REASONS = [
   {
     title: "The ROI is measurable",
-    body: "One of the only event platforms where the financial return is calculable before sign-up — sponsor uplift, renewal rates and cost offsets, modelled to your event.",
+    body: "One of the only event platforms where the financial return is calculable before sign-up - sponsor uplift, renewal rates and cost offsets, modelled to your event.",
     link: { label: "Open ROI Calculator", href: "/roi-calculator" },
   },
   {
     title: "Designed for every stage",
-    body: "Most event tech solves one problem. Identyca covers the full lifecycle — AI pre-event planning, real-time floor networking and permanent venue intelligence.",
+    body: "Most event tech solves one problem. Identyca covers the full lifecycle - AI pre-event planning, real-time floor networking and permanent venue intelligence.",
     link: { label: "See the problem", href: "/problem" },
   },
   {
     title: "Built for scale",
-    body: "From a 150-person industry summit to a 50,000-person expo — the beacon infrastructure scales horizontally. Network load is identical for 500 or 50,000 phones.",
+    body: "From a 150-person industry summit to a 50,000-person expo - the beacon infrastructure scales horizontally. Network load is identical for 500 or 50,000 phones.",
     link: { label: "Explore Spaces", href: "/spaces" },
   },
   {
@@ -294,7 +258,7 @@ const QUOTES = [
     a: "Early pilot advisor",
   },
   { q: "This solves the single biggest frustration every exhibitor has at trade shows.", a: "B2B events veteran" },
-  { q: "The economics are genius — organizers can run this at zero net cost.", a: "Conference director" },
+  { q: "The economics are genius - organizers can run this at zero net cost.", a: "Conference director" },
 ];
 
 export function Testimonials() {
@@ -303,11 +267,15 @@ export function Testimonials() {
       <Container>
         <Stagger className="grid gap-4 md:grid-cols-3">
           {QUOTES.map((t) => (
-            <StaggerItem as="figure" key={t.a} className="flex flex-col justify-between gap-8 rounded-3xl border border-border-hairline bg-background-elevated p-7 sm:p-8">
+            <StaggerItem key={t.a} className="h-full">
+              <BorderGlow className="h-full">
+              <figure className="flex h-full flex-col justify-between gap-8 rounded-3xl border border-border-hairline bg-background-elevated p-7 sm:p-8">
               <blockquote className="font-serif text-[1.625rem] leading-[1.2] tracking-[-0.01em] text-text-primary">
                 “{t.q}”
               </blockquote>
-              <figcaption className="eyebrow text-text-tertiary">— {t.a}</figcaption>
+              <figcaption className="eyebrow text-text-tertiary">- {t.a}</figcaption>
+              </figure>
+              </BorderGlow>
             </StaggerItem>
           ))}
         </Stagger>

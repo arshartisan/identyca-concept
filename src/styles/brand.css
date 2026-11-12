@@ -240,6 +240,43 @@ body {
   html { scroll-behavior: auto; }
 }
 
+/* Bento (home differentiators) ---------------------------------------------- */
+@utility bento-title {
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.875rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  text-wrap: balance;
+  background-image: linear-gradient(to bottom, var(--color-text-primary) 30%, var(--color-text-tertiary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bento-trace {
+  stroke-dasharray: 12 120;
+  animation: trace 3.2s linear infinite;
+}
+.bento-caret {
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes trace {
+  from { stroke-dashoffset: 132; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes caret {
+  50% { opacity: 0; }
+}
+.bento-paused,
+.bento-paused * {
+  animation-play-state: paused !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-visual,
+  .bento-visual * {
+    animation: none !important;
+  }
+}
+
 /* Glow button (Button variant="glow", primary <Cta>) -------------------------
  * Near-black body with a stacked inset glow climbing from the bottom edge,
  * lightest at the rim, deepest at the top. Visual only: size/radius come from

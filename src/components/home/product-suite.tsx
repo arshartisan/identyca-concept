@@ -9,6 +9,7 @@ import { RiArrowRightLine } from "@remixicon/react";
 import { Accent, Container, Section, SectionHeading } from "@/components/site/section";
 import { Stagger, StaggerItem, EASE } from "@/components/site/motion";
 import { cx } from "@/utils/cx";
+import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
 
 type Product = {
   key: string;
@@ -29,7 +30,7 @@ const PRODUCTS: Product[] = [
     tagline: "See who matters. Connect instantly.",
     description: "Real-time identity overlay and smart badge networking: hands-free, on the event floor.",
     bullets: [
-      "Real-time mapping of every attendee — name, title, company",
+      "Real-time mapping of every attendee - name, title, company",
       "30–50 cm spatial positioning of people and equipment via smart sensor badges",
       "Live proximity radar, smart filtering and automatic interaction logging",
     ],
@@ -42,7 +43,7 @@ const PRODUCTS: Product[] = [
     name: "Event Intelligence",
     tagline: "See who matters. Plan what wins.",
     description:
-      "AI-native planning workspace for organizers and prospecting engine for event vendors — powered by a live global events graph.",
+      "AI-native planning workspace for organizers and prospecting engine for event vendors - powered by a live global events graph.",
     bullets: [
       "Sponsor, speaker, venue, agenda, pricing and date intelligence in one workspace",
       "AI-matched recommendations from a proprietary global events graph",
@@ -57,9 +58,9 @@ const PRODUCTS: Product[] = [
     name: "Spaces",
     tagline: "See your whole venue. Sell every event.",
     description:
-      "The badge-less networking, wayfinding and experience layer installed permanently in your venue — licensed to you, resold by you into every event you host.",
+      "The badge-less networking, wayfinding and experience layer installed permanently in your venue - licensed to you, resold by you into every event you host.",
     bullets: [
-      "Turns smartphones into their own tracker — no badges, no per-event hardware",
+      "Turns smartphones into their own tracker - no badges, no per-event hardware",
       "Networking, indoor wayfinding, find-my-group, gamification and crowd intelligence",
       "One-time beacon install, one annual licence, resold into every event",
     ],
@@ -81,16 +82,17 @@ export function ProductSuite() {
               From the planning table to the <Accent>event floor</Accent>.
             </>
           }
-          lead="Real-time, Event Intelligence and Spaces interoperate on one data model — run one, or run the whole lifecycle."
+          lead="Real-time, Event Intelligence and Spaces interoperate on one data model - run one, or run the whole lifecycle."
         />
         <Stagger className="mt-14 grid gap-4 lg:grid-cols-3" gap={0.1}>
           {PRODUCTS.map((p) => (
             <StaggerItem key={p.key} className="h-full">
+              <BorderGlow className="h-full transition-transform duration-300 ease-out hover:-translate-y-1">
               <Link
                 href={p.href}
-                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-hairline bg-background-elevated outline-none transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-border-hairline-strong hover:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.25)] focus-visible:ring-2 focus-visible:ring-border-focus-ring"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-hairline bg-background-elevated outline-none transition-[border-color,box-shadow] duration-300 ease-out hover:border-border-hairline-strong hover:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.25)] focus-visible:ring-2 focus-visible:ring-border-focus-ring"
               >
-                <div className="relative h-60 overflow-hidden border-b border-border-hairline bg-background-sunken">{p.visual}</div>
+                <div className="relative h-72 overflow-hidden border-b border-border-hairline bg-background-sunken">{p.visual}</div>
                 <div className="flex flex-1 flex-col gap-4 p-6 sm:p-8">
                   <div className="flex items-center gap-2">
                     <span className="eyebrow text-text-tertiary">Identyca {p.name}</span>
@@ -114,6 +116,7 @@ export function ProductSuite() {
                   </span>
                 </div>
               </Link>
+              </BorderGlow>
             </StaggerItem>
           ))}
         </Stagger>
@@ -134,8 +137,8 @@ function RealtimeVisual() {
     { n: "Priya Nair", r: "CTO · TechVentures", m: 79 },
   ];
   return (
-    <div ref={ref} className="absolute inset-0 flex flex-col justify-center gap-2 px-6">
-      <div className="mb-1 flex gap-1.5">
+    <div ref={ref} className="absolute inset-0 flex flex-col justify-center gap-2 p-6 sm:px-7">
+      <div className="mb-1.5 flex flex-wrap gap-1.5">
         {["Nearby 47", "Matches 12", "VP+", "Tech"].map((c) => (
           <span key={c} className="rounded-full border border-border-hairline bg-background-elevated px-2 py-0.5 text-caption-2-medium text-text-secondary">
             {c}
@@ -188,6 +191,7 @@ export function SignalMapVisual() {
   return (
     <div ref={ref} className="absolute inset-0">
       <div aria-hidden className="bg-grid absolute inset-0 opacity-60 [background-size:28px_28px]" />
+      <div className="absolute inset-x-10 top-10 bottom-9">
       <svg aria-hidden className="absolute inset-0 size-full" preserveAspectRatio="none" viewBox="0 0 100 100">
         {nodes.map((n, i) => (
           <motion.line
@@ -230,6 +234,7 @@ export function SignalMapVisual() {
           </div>
         </motion.div>
       ))}
+      </div>
     </div>
   );
 }
@@ -249,8 +254,8 @@ export function VenueVisual() {
     d: (i % 5) * 0.6,
   }));
   return (
-    <div className="absolute inset-0 p-5">
-      <div className="relative grid size-full grid-cols-6 grid-rows-3 gap-1.5">
+    <div className="absolute inset-0 flex flex-col gap-3 p-6">
+      <div className="relative grid min-h-0 flex-1 grid-cols-6 grid-rows-3 gap-1.5">
         {zones.map((z) => (
           <div key={z.l} className={cx("rounded-lg border border-border-hairline bg-background-elevated p-1.5", z.c)}>
             <span className="eyebrow text-[9px] text-text-tertiary">{z.l}</span>
@@ -267,7 +272,7 @@ export function VenueVisual() {
           />
         ))}
       </div>
-      <div className="absolute end-5 bottom-5 flex gap-1.5">
+      <div className="flex justify-end gap-1.5">
         <span className="rounded-full border border-border-hairline bg-background-elevated px-2 py-0.5 text-caption-2-semibold text-text-secondary">11 beacons</span>
         <span className="rounded-full border border-border-hairline bg-background-elevated px-2 py-0.5 text-caption-2-semibold text-text-secondary">1,842 phones located</span>
       </div>
