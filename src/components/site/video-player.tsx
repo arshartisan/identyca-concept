@@ -5,21 +5,6 @@ import Image from "next/image";
 import { RiExternalLinkLine, RiPlayFill } from "@remixicon/react";
 import { cx } from "@/utils/cx";
 
-export const R2 = "https://pub-ef4926f03e79462ab0c0771d4c95c635.r2.dev/";
-
-export const VIDEOS = {
-  realtime: `${R2}Identyca%20Real%20Time%20product%20explainer%20video.mp4`,
-  intelligence: `${R2}Identyca%20Event%20Intelligence%20product%20explainer%20video.mp4`,
-  organizerWalkthrough: `${R2}Identyca%20-%20Event%20Organizer%20Intelligence%20Explainer_1080p.mp4`,
-  inAction: `${R2}Identyca%20draft%20video%20%232%20ver1-%20Google%20Flow.mp4`,
-  avatar: `${R2}Identyca%20avatar%20style%20video.mp4`,
-} as const;
-
-export const POSTERS = {
-  inAction: `${R2}identyca-poster_2.png`,
-  avatar: `${R2}identyca-poster.png`,
-} as const;
-
 /**
  * Poster-first video: loads nothing until play is pressed.
  * Pass `webm` (VP9/AV1 + Opus) to support Chromium builds without H.264/AAC

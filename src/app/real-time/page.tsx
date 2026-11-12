@@ -27,7 +27,8 @@ import { Accent, Card, Container, Section, SectionHeading } from "@/components/s
 import { CtaBand, FeatureGrid, PageHero, Steps } from "@/components/site/blocks";
 import { Cta } from "@/components/site/cta";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/motion";
-import { VideoPlayer, VIDEOS, POSTERS } from "@/components/site/video-player";
+import { VideoPlayer } from "@/components/site/video-player";
+import { VIDEOS, POSTERS, WEBM } from "@/lib/videos";
 import { ArViewfinder } from "@/components/home/ar-viewfinder";
 import { ArchitectureFlow } from "@/components/realtime/architecture-flow";
 import { Testimonials } from "@/components/home/home-sections";
@@ -207,7 +208,7 @@ export default function RealtimePage() {
             ]}
           />
           <Reveal className="mt-14">
-            <VideoPlayer src={VIDEOS.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time - product explainer" />
+            <VideoPlayer src={VIDEOS.realtime} webm={WEBM.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time - product explainer" />
           </Reveal>
         </Container>
       </Section>

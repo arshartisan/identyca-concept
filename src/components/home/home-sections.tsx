@@ -10,7 +10,8 @@ import { DifferentiatorsBento } from "@/components/home/differentiators-bento";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/motion";
 import { Cta } from "@/components/site/cta";
 import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
-import { VideoPlayer, VIDEOS } from "@/components/site/video-player";
+import { VideoPlayer } from "@/components/site/video-player";
+import { VIDEOS, WEBM } from "@/lib/videos";
 import { DEMO_HREF } from "@/lib/site";
 
 /* -------------------------------------------------------------- Videos */
@@ -21,7 +22,7 @@ export function ExplainerVideos() {
       <Container>
         <Stagger className="grid gap-4 md:grid-cols-2">
           <StaggerItem>
-            <VideoPlayer src={VIDEOS.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time - product explainer" />
+            <VideoPlayer src={VIDEOS.realtime} webm={WEBM.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time - product explainer" />
           </StaggerItem>
           <StaggerItem>
             <VideoPlayer

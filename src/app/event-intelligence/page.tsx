@@ -19,7 +19,8 @@ import { Accent, Card, Container, Eyebrow, Section, SectionHeading } from "@/com
 import { CtaBand, FeatureGrid, Steps } from "@/components/site/blocks";
 import { Cta } from "@/components/site/cta";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/motion";
-import { VideoPlayer, VIDEOS } from "@/components/site/video-player";
+import { VideoPlayer } from "@/components/site/video-player";
+import { VIDEOS } from "@/lib/videos";
 import { SignalMapVisual } from "@/components/home/product-suite";
 import { ModuleExplorer } from "@/components/intelligence/module-explorer";
 import { CONTACT_EMAIL, DEMO_HREF } from "@/lib/site";
