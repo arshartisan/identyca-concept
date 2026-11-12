@@ -84,11 +84,11 @@ function RoiPhone() {
   return (
     <div aria-hidden className="bento-visual pointer-events-none absolute inset-0">
       {/* guide rail with nodes */}
-      <div className={cx("absolute start-[13%] top-[34%] bottom-0 w-px border-s", LINE)} />
-      <div className={cx("absolute start-[13%] top-[52%] size-10 -translate-x-1/2 rounded-full", G2)} />
-      <div className={cx("absolute start-[13%] top-[86%] size-10 -translate-x-1/2 rounded-full", G2)} />
+      <div className={cx("absolute start-[13%] top-[44%] bottom-0 w-px border-s", LINE)} />
+      <div className={cx("absolute start-[13%] top-[60%] size-10 -translate-x-1/2 rounded-full", G2)} />
+      <div className={cx("absolute start-[13%] top-[90%] size-10 -translate-x-1/2 rounded-full", G2)} />
       {/* phone, bleeding off the right and bottom */}
-      <div className={cx("absolute start-[24%] top-[28%] -end-[18%] -bottom-[6%] rounded-[44px] border-[3px] p-6 pt-16", LINE, G1)}>
+      <div className={cx("absolute start-[24%] top-[38%] -end-[18%] -bottom-[14%] rounded-[44px] border-[3px] p-6 pt-16", LINE, G1)}>
         <div className={cx("absolute end-[30%] top-5 h-7 w-28 rounded-full", G2)} />
         <div className="flex max-w-[260px] flex-col gap-5">
           <SliderRow label="Sponsors" fill={0.62} />
@@ -104,7 +104,7 @@ function RoiPhone() {
         </div>
       </div>
       {/* cursor dragging the live slider */}
-      <svg viewBox="0 0 40 40" className="why2-cursor absolute start-[16%] top-[56%] size-12 drop-shadow-[0_6px_14px_rgb(0_0_0/0.6)]">
+      <svg viewBox="0 0 40 40" className="why2-cursor absolute start-[16%] top-[66%] size-12 drop-shadow-[0_6px_14px_rgb(0_0_0/0.6)]">
         <path d="M6 4 L34 17 L20 21 L14 35 Z" fill="#d9d9de" stroke="#0a0a0b" strokeWidth={1.5} strokeLinejoin="round" />
       </svg>
     </div>
@@ -224,7 +224,12 @@ export function WhyBento({ reasons, demoHref }: { reasons: Reason[]; demoHref: s
       <Stagger gap={0.07} className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-[0.95fr_1.15fr_0.9fr] lg:grid-rows-[300px_320px]">
         {/* 1. ROI: tall left card */}
         <Card href={roi.link.href} label={`${roi.title} - ${roi.link.label}`} shot="why-roi" className="h-[540px] md:row-span-2 md:h-auto lg:row-span-2">
-          <h3 className="relative z-10 max-w-[15ch] p-7 text-title-1-semibold tracking-[-0.02em] text-text-primary">{roi.title}</h3>
+          <div className="relative z-10 flex flex-col gap-2 p-7">
+            <h3 className="max-w-[15ch] text-title-1-semibold tracking-[-0.02em] text-text-primary">{roi.title}</h3>
+            <p className="max-w-[34ch] text-body-regular text-text-secondary">
+              Model sponsor uplift, renewals and cost offsets for your event - the return is known before you sign.
+            </p>
+          </div>
           <RoiPhone />
         </Card>
 
