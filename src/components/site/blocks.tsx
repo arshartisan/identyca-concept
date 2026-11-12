@@ -178,7 +178,7 @@ export function CtaBand({
   secondary?: { label: string; href: string } | null;
 }) {
   return (
-    <Section className="pt-8 sm:pt-8">
+    <Section className="pt-8 pb-0 sm:pt-8 sm:pb-0">
       <Container>
         <Reveal>
           <div className="dark relative isolate overflow-hidden rounded-[32px] bg-background-full px-6 py-16 text-center sm:px-16 sm:py-24">

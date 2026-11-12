@@ -30,7 +30,7 @@ const arg = (name, fallback) => {
 const URL_ = arg("url", "https://identyca-concept.vercel.app/");
 const OUT = path.resolve(arg("out", "showcase"));
 const ONLY = arg("only", "all"); // all | desktop | desktop-zoom | mobile
-const FPS = Number(arg("fps", "60"));
+const FPS = Number(arg("fps", "90"));
 const QUALITY = Number(arg("quality", "92")); // JPEG quality of captured frames
 
 /* ------------------------------------------------------- choreography */
@@ -293,7 +293,14 @@ async function render(browser, spec) {
       if (step.unzoom) to = { ...cam, z: 1, w: 0 };
       else {
         const t = await page.evaluate((n) => window.__showcase.target(n), step.zoom ?? step.pan);
-        if (!t) throw new Error(`no [data-shot="${step.zoom ?? step.pan}"] on the page`);
+        if (!t) {
+          // Shot markers ship with the site code: a deploy without them (e.g. an older
+          // Vercel build) still renders, the close-up just becomes a plain hold.
+          console.warn(`
+  ! no [data-shot="${step.zoom ?? step.pan}"] on ${URL_} - holding instead of zooming (deploy the latest code, or pass --url http://localhost:3000)`);
+          for (let i = 0; i < Math.round(step.dur * FPS); i++) await frame();
+          continue;
+        }
         const z = step.zoom ? step.z : cam.z;
         // keep the zoomed view inside the page horizontally (no blank margins)
         const half = vw / (2 * z);
