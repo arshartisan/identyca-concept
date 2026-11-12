@@ -211,10 +211,10 @@ function WayfindingPin({ x, y }: { x: number; y: number }) {
 
 const TRACES: { d: string; dur: number; delay: number; tone?: "warm" }[] = [
   { d: planePath([[-218, 0], [-300, 0], [-300, 52]]), dur: 3.4, delay: 0 },
-  { d: planePath([[-150, -70], [-150, -90], [-206, -90]]), dur: 3.8, delay: -1.2 },
+  { d: planePath([[-205, -40], [-205, -60], [-276, -60]]), dur: 3.8, delay: -1.2 },
   { d: planePath([[96, -66], [96, -160], [24, -160], [24, -174]]), dur: 4.4, delay: -2.4 },
-  { d: planePath([[218, 0], [296, 0], [296, -40]]), dur: 3.6, delay: -0.6, tone: "warm" },
-  { d: planePath([[328, -40], [328, -150], [360, -150]]), dur: 3.2, delay: -1.8 },
+  { d: planePath([[218, 0], [270, 0], [270, -58], [300, -58]]), dur: 3.6, delay: -0.6, tone: "warm" },
+  { d: planePath([[340, -90], [340, -150], [350, -150]]), dur: 3.2, delay: -1.8 },
   { d: planePath([[150, 70], [150, 214], [112, 214]]), dur: 4, delay: -3 },
   { d: planePath([[84, 214], [-10, 214], [-10, 262]]), dur: 3.6, delay: -0.9 },
   { d: planePath([[96, -160], [150, -160], [150, -244]]), dur: 3.9, delay: -2, tone: "warm" },
@@ -295,8 +295,8 @@ export function FooterScene({ className }: { className?: string }) {
         {/* Objects behind the loop (smaller screen y first) */}
         <InsightBars x={-20} y={-230} />
         <Label x={62} y={-230} dx={16} dy={-30}>Insights</Label>
-        <Puck x={-230} y={-90} r={20} h={12} ping delay={0.4} />
-        <Label x={-230} y={-90} dx={34} dy={-4}>Beacon</Label>
+        <Puck x={-300} y={-60} r={20} h={12} ping delay={0.4} />
+        <Label x={-300} y={-60} dx={34} dy={-4}>Beacon</Label>
         <WayfindingPin x={150} y={-268} />
         <Label x={150} y={-268} dx={40} dy={-24}>Wayfinding</Label>
         <SensorTile x={350} y={-180} />
@@ -320,8 +320,8 @@ export function FooterScene({ className }: { className?: string }) {
         </g>
 
         {/* Objects in front of the loop */}
-        <HubBox x={264} y={-36} />
-        <Label x={296} y={-4} dx={50} dy={10}>Venue hub</Label>
+        <HubBox x={300} y={-90} />
+        <Label x={364} y={-26} dx={12} dy={8}>Venue hub</Label>
         <Puck x={98} y={214} r={18} h={12} ping delay={1.4} led="#f88000" />
         <Label x={98} y={214} dx={28} dy={8}>AR node</Label>
         <Puck x={-10} y={276} r={14} h={8} ping delay={2.2} />
