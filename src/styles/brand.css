@@ -128,6 +128,10 @@
   --color-warm: var(--color-brand-orange-400);
   --color-warm-soft: color-mix(in oklab, var(--color-brand-orange-400) 18%, transparent);
   --color-positive: var(--color-emerald-400);
+  /* Text greys meet WCAG AA on full/sunken/elevated surfaces:
+   * secondary 6.5-7.0:1, tertiary 4.7-5.0:1 (BoardUI's 500/600 were 3.9 / 2.4). */
+  --color-text-secondary: #9a9a9a;
+  --color-text-tertiary: #808080;
 }
 
 @theme inline {
@@ -383,23 +387,43 @@ body {
 }
 
 /* Dot-matrix words (home hero) -----------------------------------------------
- * Each lit dot boots in at its own --d, then a teal scan sweeps across columns
- * (--c staggers by column). Reduced motion: dots are simply on. */
+ * Each lit dot boots in once at its own --d. The cyan scan is ONE gradient band
+ * per word, blended (multiply) over the dots and moved with a transform; the
+ * old per-dot `fill` animation re-styled ~500 circles every frame on the main
+ * thread. The band rests transparent, so reduced motion simply shows the dots. */
 .dm-dot {
-  animation:
-    dm-in 0.45s ease-out var(--d, 0s) both,
-    dm-scan 7s ease-in-out var(--c, 2s) infinite;
+  animation: dm-in 0.45s ease-out var(--d, 0s) both;
+}
+.dm-scan {
+  opacity: 0;
+  mix-blend-mode: multiply;
+  transform-box: fill-box;
+  animation: dm-sweep 7s cubic-bezier(0.45, 0, 0.55, 1) 2.2s infinite;
 }
 @keyframes dm-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-@keyframes dm-scan {
-  0%, 7%, 100% { fill: currentColor; }
-  3% { fill: var(--color-signal); }
+@keyframes dm-sweep {
+  0% { opacity: 1; transform: translateX(-100%); }
+  24% { opacity: 1; transform: translateX(100%); }
+  25%, 100% { opacity: 0; transform: translateX(100%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .dm-dot { animation: none; }
+  .dm-dot,
+  .dm-scan { animation: none; }
+}
+
+/* Hero entrance: CSS, not JS, so it starts at first paint instead of after
+ * hydration (the lead paragraph is the LCP element). */
+.hero-in {
+  animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(12px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-in { animation: none; }
 }
 
 /* Footer isometric scene ---------------------------------------------------- */

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { RiArrowRightLine, RiShieldCheckLine } from "@remixicon/react";
 import { useReducedMotion } from "@/components/site/use-reduced-motion";
 import { Container } from "@/components/site/section";
@@ -58,10 +58,18 @@ function rand(a: number, b: number) {
 /** Dot-matrix word as SVG circles, drawn into a parent <svg> at (x, y) with `pitch` spacing. */
 function DotWord({ text, x, y, pitch, align = "center" }: { text: string; x: number; y: number; pitch: number; align?: "center" | "start" }) {
   const { cells, cols } = layoutText(text);
+  const gid = useId();
   const ox = align === "center" ? x - ((cols - 1) * pitch) / 2 : x;
   const oy = y - 3 * pitch;
   return (
     <g>
+      <defs>
+        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0.38" stopColor="var(--color-signal)" stopOpacity={0} />
+          <stop offset="0.5" stopColor="var(--color-signal)" />
+          <stop offset="0.62" stopColor="var(--color-signal)" stopOpacity={0} />
+        </linearGradient>
+      </defs>
       {cells.map(({ col, row, on }) => (
         <circle
           key={`${col}-${row}`}
@@ -69,9 +77,17 @@ function DotWord({ text, x, y, pitch, align = "center" }: { text: string; x: num
           cy={+(oy + row * pitch).toFixed(2)}
           r={on ? pitch * 0.3 : pitch * 0.12}
           className={on ? "dm-dot fill-current" : "fill-current opacity-[0.07]"}
-          style={on ? ({ "--d": `${(0.3 + rand(col, row) * 0.9).toFixed(3)}s`, "--c": `${(2.4 + col * 0.035).toFixed(3)}s` } as React.CSSProperties) : undefined}
+          style={on ? ({ "--d": `${(0.3 + rand(col, row) * 0.9).toFixed(3)}s` } as React.CSSProperties) : undefined}
         />
       ))}
+      <rect
+        x={+(ox - pitch).toFixed(2)}
+        y={+(oy - pitch).toFixed(2)}
+        width={+((cols + 1) * pitch).toFixed(2)}
+        height={8 * pitch}
+        fill={`url(#${gid})`}
+        className="dm-scan"
+      />
     </g>
   );
 }
@@ -161,7 +177,7 @@ function LogoTile({ className }: { className?: string }) {
       <span className="animate-pulse-ring absolute inset-[6%] rounded-[24%] border border-signal/40 [animation-duration:3.2s]" />
       <div className="relative size-full rounded-[22%] border border-border-hairline-strong bg-background-elevated p-[9%] shadow-[0_30px_80px_-30px_rgb(0_0_0/0.8),inset_0_1px_0_0_rgb(255_255_255/0.06)]">
         <div className="relative size-full overflow-hidden rounded-[17%] bg-black shadow-[inset_0_2px_10px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.06)]">
-          <Image src="/brand/identyca-logo.png" alt="" width={200} height={200} preload className="absolute inset-[13%] size-[74%]" />
+          <Image src="/brand/identyca-logo.png" alt="" width={150} height={150} preload className="absolute inset-[13%] size-[74%]" />
         </div>
       </div>
     </div>
@@ -176,11 +192,9 @@ export function HomeHero() {
   const attendee = useCycle(["Attendee", "Smart badge", "Profile"], 2600, live);
   const match = useCycle(["94% match", "87% match", "79% match"], 2200, live);
 
-  const fade = (delay: number) => ({
-    initial: { opacity: 0, y: 14, filter: "blur(4px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-    transition: { duration: 0.8, ease: EASE, delay },
-  });
+  // Entrance runs in CSS (.hero-in), not motion: it starts at first paint
+  // instead of after hydration, and the lead paragraph is the LCP element.
+  const enter = (delay: number) => ({ animationDelay: `${delay}s` });
 
   return (
     <section className="relative overflow-hidden pt-28 pb-10 sm:pt-36 sm:pb-16">
@@ -189,23 +203,23 @@ export function HomeHero() {
 
       <Container className="relative">
         <div className="flex flex-col items-center">
-          <motion.a
+          <a
             href="/spaces"
-            {...fade(0)}
-            className="group inline-flex items-center gap-2 rounded-full border border-border-hairline bg-background-elevated/70 py-1 ps-1 pe-3 text-caption-1-medium text-text-secondary backdrop-blur transition-colors duration-150 hover:border-border-hairline-strong hover:text-text-primary"
+            style={enter(0)}
+            className="hero-in group inline-flex items-center gap-2 rounded-full border border-border-hairline bg-background-elevated/70 py-1 ps-1 pe-3 text-caption-1-medium text-text-secondary backdrop-blur transition-colors duration-150 hover:border-border-hairline-strong hover:text-text-primary"
           >
             <span className="rounded-full bg-signal px-2 py-0.5 text-caption-2-semibold text-neutral-950">New</span>
             Identyca Spaces<span className="max-sm:hidden"> - the permanent venue layer</span>
             <RiArrowRightLine className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
-          </motion.a>
+          </a>
 
           <h1 className="sr-only">Identyca - See who matters. Connect instantly.</h1>
 
           {/* Desktop stage: words, connectors, logo tile */}
-          <motion.div
-            {...fade(0.15)}
+          <div
+            style={enter(0.05)}
             aria-hidden
-            className="relative mt-6 hidden aspect-[1200/480] w-full max-w-[1200px] text-text-primary md:block"
+            className="hero-in relative mt-6 hidden aspect-[1200/480] w-full max-w-[1200px] text-text-primary md:block"
           >
             <svg viewBox={`0 0 ${VW} ${VH}`} className="absolute inset-0 size-full overflow-visible" fill="none">
               {LINES.map((l) => (
@@ -252,35 +266,35 @@ export function HomeHero() {
             <div className="absolute w-[19.7%]" style={{ ...at(482, 122) }}>
               <LogoTile className="animate-float [animation-duration:8s]" />
             </div>
-          </motion.div>
+          </div>
 
           {/* Mobile: tile above stacked dot words */}
-          <motion.div {...fade(0.15)} aria-hidden className="mt-10 flex w-full flex-col items-center gap-8 md:hidden">
+          <div style={enter(0.05)} aria-hidden className="hero-in mt-10 flex w-full flex-col items-center gap-8 md:hidden">
             <LogoTile className="w-36" />
             <div className="flex w-full max-w-xs flex-col items-center gap-3">
               <DotWordSvg text="SEE. MATCH." className="w-full" />
               <DotWordSvg text="CONNECT." className="w-[74%]" />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.p {...fade(0.45)} className="text-lead mt-8 max-w-xl text-center text-pretty text-text-secondary md:mt-2">
+          <p style={enter(0.12)} className="hero-in text-lead mt-8 max-w-xl text-center text-pretty text-text-secondary md:mt-2">
             AI + AR intelligence for the conference industry - from the planning table to the event floor to the venue
             itself.
-          </motion.p>
+          </p>
 
-          <motion.div {...fade(0.55)} className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+          <div style={enter(0.2)} className="hero-in mt-8 flex flex-col items-center gap-3 sm:flex-row">
             <Cta href={DEMO_HREF} trailingIcon={RiArrowRightLine}>
               Book a demo
             </Cta>
             <Cta href="/roi-calculator" variant="secondary">
               Calculate your ROI
             </Cta>
-          </motion.div>
+          </div>
 
-          <motion.p {...fade(0.65)} className="mt-6 inline-flex items-center gap-1.5 text-caption-1-medium text-text-tertiary">
+          <p style={enter(0.28)} className="hero-in mt-6 inline-flex items-center gap-1.5 text-caption-1-medium text-text-tertiary">
             <RiShieldCheckLine className="size-4" aria-hidden />
             Zero facial recognition. Identity is opt-in, via smart badge.
-          </motion.p>
+          </p>
         </div>
       </Container>
     </section>

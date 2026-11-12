@@ -4,7 +4,6 @@ import "@/styles/app.css";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SmoothScroll } from "@/components/site/smooth-scroll";
-import { Toaster } from "@/components/base/toast/toast";
 import { MotionProvider } from "@/components/site/motion-provider";
 
 const manrope = Manrope({
@@ -60,7 +59,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
-          <Toaster />
         </MotionProvider>
       </body>
     </html>
