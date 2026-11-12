@@ -370,3 +370,23 @@ body {
   inset: var(--glow-radius);
   border-radius: inherit;
 }
+
+/* Dot-matrix words (home hero) -----------------------------------------------
+ * Each lit dot boots in at its own --d, then a teal scan sweeps across columns
+ * (--c staggers by column). Reduced motion: dots are simply on. */
+.dm-dot {
+  animation:
+    dm-in 0.45s ease-out var(--d, 0s) both,
+    dm-scan 7s ease-in-out var(--c, 2s) infinite;
+}
+@keyframes dm-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes dm-scan {
+  0%, 7%, 100% { fill: currentColor; }
+  3% { fill: var(--color-signal); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dm-dot { animation: none; }
+}
