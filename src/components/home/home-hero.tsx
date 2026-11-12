@@ -11,7 +11,6 @@ import { EASE } from "@/components/site/motion";
 import { DEMO_HREF } from "@/lib/site";
 import { cx } from "@/utils/cx";
 import { ArViewfinder } from "./ar-viewfinder";
-import { HeroScene } from "./hero-scene";
 
 /* ------------------------------------------------------------ Dot font */
 
@@ -298,8 +297,6 @@ export function HomeHero() {
           </p>
         </div>
       </Container>
-      {/* Isometric scene under the hero (trial): the event floor and venue wired into Identyca */}
-      <HeroScene className="hero-in mx-auto mt-10 max-w-[1400px] sm:mt-14" />
     </section>
   );
 }

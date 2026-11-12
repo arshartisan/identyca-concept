@@ -538,12 +538,3 @@ body {
 /* Lifecycle: lane dashes flow along the track */
 .why2-lane { animation: why2-lane 1.4s linear infinite; }
 @keyframes why2-lane { to { stroke-dashoffset: -24; } }
-
-/* Isometric hero scene (hero-scene.tsx) ---------------------------------------- */
-.iso-float { animation: iso-float 6s ease-in-out infinite; }
-@keyframes iso-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-/* leaderboard: one row lit at a time (4 rows x 1.1s) */
-.iso-row { opacity: 0; animation: iso-row 4.4s ease-in-out infinite; }
-@keyframes iso-row { 0%, 30%, 100% { opacity: 0; } 8%, 22% { opacity: 0.22; } }
-.iso-beam { animation: iso-beam 3.6s ease-in-out infinite; }
-@keyframes iso-beam { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
