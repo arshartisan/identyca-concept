@@ -263,7 +263,7 @@ export function HomeHero() {
               ROI
             </Pill>
 
-            <div className="absolute w-[19.7%]" style={{ ...at(482, 122) }}>
+            <div data-shot="hero-logo" className="absolute w-[19.7%]" style={{ ...at(482, 122) }}>
               <LogoTile className="animate-float [animation-duration:8s]" />
             </div>
           </div>

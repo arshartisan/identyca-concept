@@ -254,7 +254,7 @@ export function FooterScene({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div ref={wrapRef} aria-hidden className={cx("bento-visual relative w-full", className)}>
+    <div ref={wrapRef} data-shot="footer-scene" aria-hidden className={cx("bento-visual relative w-full", className)}>
       <svg ref={svgRef} viewBox={`0 0 ${VW} ${VH}`} className="block h-auto w-full overflow-hidden [mask-image:radial-gradient(ellipse_80%_92%_at_50%_50%,black_66%,transparent)]" fill="none">
         <defs>
           <linearGradient id="scene-track" x1="0" y1="0" x2="1" y2="1">

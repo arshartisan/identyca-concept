@@ -92,7 +92,7 @@ export function ProductSuite() {
                 href={p.href}
                 className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-hairline bg-background-elevated outline-none transition-[border-color,box-shadow] duration-300 ease-out hover:border-border-hairline-strong hover:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.25)] focus-visible:ring-2 focus-visible:ring-border-focus-ring"
               >
-                <div className="relative h-72 overflow-hidden border-b border-border-hairline bg-background-sunken">{p.visual}</div>
+                <div data-shot={`product-${p.key}`} className="relative h-72 overflow-hidden border-b border-border-hairline bg-background-sunken">{p.visual}</div>
                 <div className="flex flex-1 flex-col gap-4 p-6 sm:p-8">
                   <div className="flex items-center gap-2">
                     <span className="eyebrow text-text-tertiary">Identyca {p.name}</span>

@@ -31,7 +31,9 @@ function BentoCard({
   variant,
   className,
   visual,
+  shot,
 }: {
+  shot?: string;
   title: ReactNode;
   body?: ReactNode;
   /** tall: visual + title/body underneath. small: big gradient title over/under the visual. overlay: visual fills the card behind a centred title. */
@@ -48,6 +50,7 @@ function BentoCard({
       <BorderGlow className="h-full">
       <div
         ref={ref}
+        data-shot={shot}
         className={cx(
           "group relative isolate flex h-full flex-col overflow-hidden rounded-3xl border border-border-hairline bg-background-elevated",
           "shadow-[inset_0_1px_0_0_rgb(255_255_255/0.04)] transition-colors duration-300 hover:border-border-hairline-strong",
@@ -644,6 +647,7 @@ export function DifferentiatorsBento({ className }: { className?: string }) {
       <BentoCard
         variant="tall"
         className="lg:col-start-2 lg:row-span-4 lg:row-start-5"
+        shot="bento-eco"
         title="One ecosystem. Three products."
         body="Pre-event planning, the event floor and the venue layer run on one data model - Event Intelligence, Real-time and Spaces, unified."
         visual={() => <EcosystemVisual />}
@@ -651,6 +655,7 @@ export function DifferentiatorsBento({ className }: { className?: string }) {
       <BentoCard
         variant="tall"
         className="lg:col-start-3 lg:row-span-4 lg:row-start-3"
+        shot="bento-roi"
         title="Built for organizer + sponsor ROI"
         body="Deploy at zero net cost by reselling smart glass access and analytics. Sponsors see 3–5× more qualified conversations."
         visual={(s) => <RoiVisual {...s} />}

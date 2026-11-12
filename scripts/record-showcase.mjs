@@ -29,7 +29,7 @@ const arg = (name, fallback) => {
 };
 const URL_ = arg("url", "https://identyca-concept.vercel.app/");
 const OUT = path.resolve(arg("out", "showcase"));
-const ONLY = arg("only", "all"); // all | desktop | mobile
+const ONLY = arg("only", "all"); // all | desktop | desktop-zoom | mobile
 const FPS = Number(arg("fps", "60"));
 const QUALITY = Number(arg("quality", "92")); // JPEG quality of captured frames
 
@@ -53,6 +53,43 @@ const DESKTOP = {
     { hold: 1.4 },
     { scroll: "bottom", dur: 3.4 },
     { hold: 4.2 }, // footer loop
+  ],
+};
+
+// ~28 s walkthrough with camera close-ups on the animated components.
+// zoom: push in on a [data-shot] target; pan: glide to another target while zoomed;
+// unzoom: pull back to the full page. Scrolls always happen at 1x.
+const DESKTOP_ZOOM = {
+  name: "desktop-zoom",
+  context: { viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 },
+  steps: [
+    { hold: 1.8 }, // hero: dot-matrix boot
+    { zoom: "hero-logo", z: 1.9, dur: 1.4 },
+    { hold: 1.0 },
+    { unzoom: true, dur: 1.0 },
+    { scroll: "#products", offset: 96, dur: 1.5 },
+    { zoom: "product-rt", z: 1.8, dur: 1.1 },
+    { hold: 0.9 },
+    { pan: "product-ei", dur: 1.0 },
+    { hold: 0.7 },
+    { unzoom: true, dur: 0.9 },
+    { scroll: "#different", offset: 72, dur: 1.5 },
+    { hold: 0.4 },
+    { zoom: "bento-eco", z: 1.9, dur: 1.1 },
+    { hold: 1.0 },
+    { pan: "bento-roi", dur: 1.1 },
+    { hold: 0.8 },
+    { unzoom: true, dur: 0.9 },
+    { scroll: "#why", offset: 72, dur: 1.5 },
+    { hold: 0.3 },
+    { zoom: "why-roi", z: 1.9, dur: 1.0 },
+    { hold: 0.8 },
+    { pan: "why-stage", dur: 0.9 },
+    { hold: 0.7 },
+    { unzoom: true, dur: 0.8 },
+    { scroll: "bottom", dur: 1.8 },
+    { zoom: "footer-scene", z: 1.6, dur: 1.2 },
+    { hold: 1.6 },
   ],
 };
 
@@ -94,6 +131,33 @@ const MOBILE = {
 function installTimeSync() {
   const starts = new WeakMap();
   window.__showcase = {
+    // Centre of a [data-shot] target in document coords, measured with the camera off.
+    target(name) {
+      const body = document.body;
+      const prev = body.style.transform;
+      body.style.transform = "";
+      const el = document.querySelector(`[data-shot="${name}"]`);
+      const r = el ? el.getBoundingClientRect() : null;
+      body.style.transform = prev;
+      return r ? { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY } : null;
+    },
+    // Camera: scale z about focus (fx, fy); w in [0,1] slides the focus to viewport centre.
+    camera(fx, fy, z, w) {
+      const body = document.body;
+      const header = document.querySelector("header");
+      if (z < 1.0005 && w < 0.0005) {
+        body.style.transform = "";
+        body.style.transformOrigin = "";
+        if (header) header.style.opacity = "";
+        return;
+      }
+      const tx = (innerWidth / 2 - fx) * w;
+      const ty = (scrollY + innerHeight / 2 - fy) * w;
+      body.style.transformOrigin = `${fx}px ${fy}px`;
+      body.style.transform = `translate(${tx}px, ${ty}px) scale(${z})`;
+      // the fixed header would ride along inside the transformed body: fade it for close-ups
+      if (header) header.style.opacity = String(Math.max(0, 1 - (z - 1) / 0.12));
+    },
     sync() {
       const now = performance.now();
       for (const a of document.getAnimations()) {
@@ -191,6 +255,9 @@ async function render(browser, spec) {
     if (frames % FPS === 0) process.stdout.write(`\r  ${spec.name}: ${frames / FPS}s rendered`);
   };
 
+  // camera at rest: 1x, focus unused (w = 0 means no translation)
+  let cam = { fx: 0, fy: 0, z: 1, w: 0 };
+
   for (const step of spec.steps) {
     if (step.click) {
       await page.locator(step.click).first().click();
@@ -218,6 +285,35 @@ async function render(browser, spec) {
         await frame();
       }
       if (box) await page.mouse.move(spec.context.viewport.width - 4, spec.context.viewport.height - 4);
+      continue;
+    }
+    if (step.zoom || step.pan || step.unzoom) {
+      const vw = spec.context.viewport.width;
+      let to = cam;
+      if (step.unzoom) to = { ...cam, z: 1, w: 0 };
+      else {
+        const t = await page.evaluate((n) => window.__showcase.target(n), step.zoom ?? step.pan);
+        if (!t) throw new Error(`no [data-shot="${step.zoom ?? step.pan}"] on the page`);
+        const z = step.zoom ? step.z : cam.z;
+        // keep the zoomed view inside the page horizontally (no blank margins)
+        const half = vw / (2 * z);
+        to = { fx: Math.min(vw - half, Math.max(half, t.x)), fy: t.y, z, w: 1 };
+      }
+      // zooming out keeps the focus where it is; zooming in from rest starts on the target
+      const from = cam.w === 0 && step.zoom ? { ...to, z: 1, w: 0 } : cam;
+      if (step.unzoom) to = { ...to, fx: from.fx, fy: from.fy };
+      const n = Math.round(step.dur * FPS);
+      for (let i = 1; i <= n; i++) {
+        const e = smootherstep(i / n);
+        cam = {
+          fx: from.fx + (to.fx - from.fx) * e,
+          fy: from.fy + (to.fy - from.fy) * e,
+          z: from.z * Math.pow(to.z / from.z, e), // geometric: constant-speed feel
+          w: from.w + (to.w - from.w) * e,
+        };
+        await page.evaluate((c) => window.__showcase.camera(c.fx, c.fy, c.z, c.w), cam);
+        await frame();
+      }
       continue;
     }
     if (step.scroll) {
@@ -256,6 +352,7 @@ const browser = await chromium.launch({ channel: "chrome", headless: true });
 console.log(`Recording ${URL_} at ${FPS} fps`);
 try {
   if (ONLY === "all" || ONLY === "desktop") await render(browser, DESKTOP);
+  if (ONLY === "all" || ONLY === "desktop-zoom") await render(browser, DESKTOP_ZOOM);
   if (ONLY === "all" || ONLY === "mobile") await render(browser, MOBILE);
 } finally {
   await browser.close();
