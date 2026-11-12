@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
- * Identyca brand layer — sits on top of BoardUI (imported after globals.css).
+ * Identyca brand layer - sits on top of BoardUI (imported after globals.css).
  *
  *  - Swaps the family to Manrope (sans) + Instrument Serif (display accents)
  *  - Adds fluid marketing type utilities (BoardUI's ramp stops at 64px)
@@ -47,6 +47,46 @@
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
+  /* Logo palette ---------------------------------------------------------------
+   * Primary teal #00b8f0 and secondary orange #f88000, sampled from the logo
+   * (each sits at step 400). Other steps share the hue in OKLCH. */
+  --color-brand-cyan-50: #edf9ff;
+  --color-brand-cyan-100: #d8f2fe;
+  --color-brand-cyan-200: #b3e5fd;
+  --color-brand-cyan-300: #7ed6fd;
+  --color-brand-cyan-400: #00b8f0;
+  --color-brand-cyan-500: #10a6d9;
+  --color-brand-cyan-600: #0286b0;
+  --color-brand-cyan-700: #026a8c;
+  --color-brand-cyan-800: #04526c;
+  --color-brand-cyan-900: #023e53;
+  --color-brand-cyan-950: #002634;
+
+  --color-brand-orange-50: #fff5ee;
+  --color-brand-orange-100: #ffe8d9;
+  --color-brand-orange-200: #fed2b6;
+  --color-brand-orange-300: #ffb786;
+  --color-brand-orange-400: #f88000;
+  --color-brand-orange-500: #e57600;
+  --color-brand-orange-600: #b85f07;
+  --color-brand-orange-700: #934a05;
+  --color-brand-orange-800: #733800;
+  --color-brand-orange-900: #582900;
+  --color-brand-orange-950: #371800;
+
+  /* BoardUI's accent ramp (CTA, focus ring, switches, tabs, glow button rim) → logo cyan */
+  --color-accent-50: var(--color-brand-cyan-50);
+  --color-accent-100: var(--color-brand-cyan-100);
+  --color-accent-200: var(--color-brand-cyan-200);
+  --color-accent-300: var(--color-brand-cyan-300);
+  --color-accent-400: var(--color-brand-cyan-400);
+  --color-accent-500: var(--color-brand-cyan-500);
+  --color-accent-600: var(--color-brand-cyan-600);
+  --color-accent-700: var(--color-brand-cyan-700);
+  --color-accent-800: var(--color-brand-cyan-800);
+  --color-accent-900: var(--color-brand-cyan-900);
+  --color-accent-950: var(--color-brand-cyan-950);
+
   --animate-marquee: marquee 40s linear infinite;
   --animate-sweep: sweep 4.5s linear infinite;
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
@@ -62,17 +102,18 @@
   --color-border-hairline: rgb(17 17 17 / 0.08);
   --color-border-hairline-strong: rgb(17 17 17 / 0.14);
   --color-grid-line: rgb(17 17 17 / 0.045);
-  --color-signal: var(--color-blue-600);
-  --color-signal-soft: color-mix(in oklab, var(--color-blue-500) 12%, transparent);
-  --color-signal-glow: color-mix(in oklab, var(--color-blue-500) 35%, transparent);
-  --color-warm: #ff6a2b;
-  --color-warm-soft: color-mix(in oklab, #ff6a2b 12%, transparent);
+  /* Primary = logo cyan, secondary = logo orange. On paper the 600/500 steps keep text legible. */
+  --color-signal: var(--color-brand-cyan-600);
+  --color-signal-soft: color-mix(in oklab, var(--color-brand-cyan-400) 14%, transparent);
+  --color-signal-glow: color-mix(in oklab, var(--color-brand-cyan-400) 38%, transparent);
+  --color-warm: var(--color-brand-orange-500);
+  --color-warm-soft: color-mix(in oklab, var(--color-brand-orange-400) 14%, transparent);
   --color-positive: var(--color-emerald-600);
   --color-text-on-ink: #f6f5f1;
   --color-surface-ink: #0b0b0c;
 }
 
-/* Dark (ink) — whole-page dark mode and `.dark` sections */
+/* Dark (ink) - whole-page dark mode and `.dark` sections */
 .dark {
   --color-background-full: #0a0a0b;
   --color-background-sunken: #0f0f11;
@@ -80,10 +121,12 @@
   --color-border-hairline: rgb(255 255 255 / 0.08);
   --color-border-hairline-strong: rgb(255 255 255 / 0.14);
   --color-grid-line: rgb(255 255 255 / 0.05);
-  --color-signal: var(--color-blue-400);
-  --color-signal-soft: color-mix(in oklab, var(--color-blue-400) 16%, transparent);
-  --color-signal-glow: color-mix(in oklab, var(--color-blue-400) 45%, transparent);
-  --color-warm-soft: color-mix(in oklab, #ff6a2b 18%, transparent);
+  /* On ink the exact logo colours are used. */
+  --color-signal: var(--color-brand-cyan-400);
+  --color-signal-soft: color-mix(in oklab, var(--color-brand-cyan-400) 16%, transparent);
+  --color-signal-glow: color-mix(in oklab, var(--color-brand-cyan-400) 45%, transparent);
+  --color-warm: var(--color-brand-orange-400);
+  --color-warm-soft: color-mix(in oklab, var(--color-brand-orange-400) 18%, transparent);
   --color-positive: var(--color-emerald-400);
 }
 

@@ -63,7 +63,7 @@ export function ArViewfinder({ className }: { className?: string }) {
       aria-label="Illustration: through AR glasses, identity cards appear above opted-in attendees on a conference floor."
     >
       {/* Room */}
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,rgb(59_130_246/0.18),transparent_60%)]" />
+      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,color-mix(in_oklab,var(--color-signal)_18%,transparent),transparent_60%)]" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-[58%] [perspective:600px]">
         <div className="bg-grid absolute inset-0 origin-top [transform:rotateX(62deg)_scale(1.6)] opacity-70 [background-size:44px_44px]" />
       </div>

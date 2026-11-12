@@ -30,7 +30,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.identyca.io"),
   title: {
-    default: "Identyca — See who matters. Connect instantly.",
+    default: "Identyca - See who matters. Connect instantly.",
     template: "%s · Identyca",
   },
   description:
@@ -40,29 +40,20 @@ export const metadata: Metadata = {
     siteName: "Identyca",
     images: ["/images/poster-rt-v2.jpg"],
   },
-  icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfaf7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
-  ],
+  themeColor: "#0a0a0b",
+  colorScheme: "dark",
 };
-
-// Applies the stored theme before first paint (matches BoardUI's ThemeToggle key).
-const themeScript = `try{if(localStorage.getItem("boardui:theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`${manrope.variable} ${instrumentSerif.variable} ${mono.variable} antialiased`}
+      // The site is dark-only: BoardUI's dark tokens are always on.
+      className={`dark ${manrope.variable} ${instrumentSerif.variable} ${mono.variable} antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="flex min-h-dvh flex-col bg-background-full font-sans text-text-primary">
         <MotionProvider>
           <SmoothScroll />
