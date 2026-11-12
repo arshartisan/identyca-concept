@@ -43,9 +43,16 @@ function layoutText(text: string) {
   return { cells, cols: col - 1 };
 }
 
+/**
+ * Deterministic 0..1 hash of a grid cell. Integer-only on purpose: Math.sin-based
+ * hashes differ in the last bits between Node and browsers, which made the
+ * server-rendered style attributes mismatch on hydration.
+ */
 function rand(a: number, b: number) {
-  const s = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453;
-  return s - Math.floor(s);
+  let h = Math.imul(a + 1, 0x27d4eb2d) ^ Math.imul(b + 1, 0x165667b1);
+  h = Math.imul(h ^ (h >>> 15), 0x85ebca6b);
+  h ^= h >>> 13;
+  return (h >>> 0) / 0x100000000;
 }
 
 /** Dot-matrix word as SVG circles, drawn into a parent <svg> at (x, y) with `pitch` spacing. */
@@ -58,11 +65,11 @@ function DotWord({ text, x, y, pitch, align = "center" }: { text: string; x: num
       {cells.map(({ col, row, on }) => (
         <circle
           key={`${col}-${row}`}
-          cx={ox + col * pitch}
-          cy={oy + row * pitch}
+          cx={+(ox + col * pitch).toFixed(2)}
+          cy={+(oy + row * pitch).toFixed(2)}
           r={on ? pitch * 0.3 : pitch * 0.12}
           className={on ? "dm-dot fill-current" : "fill-current opacity-[0.07]"}
-          style={on ? ({ "--d": `${0.3 + rand(col, row) * 0.9}s`, "--c": `${2.4 + col * 0.035}s` } as React.CSSProperties) : undefined}
+          style={on ? ({ "--d": `${(0.3 + rand(col, row) * 0.9).toFixed(3)}s`, "--c": `${(2.4 + col * 0.035).toFixed(3)}s` } as React.CSSProperties) : undefined}
         />
       ))}
     </g>
