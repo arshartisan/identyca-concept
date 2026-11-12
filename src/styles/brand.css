@@ -224,6 +224,12 @@ html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
 }
+/* No sideways page scroll from decorative overhangs. `clip` (not `hidden`)
+ * creates no scroll container, so position: sticky keeps working. */
+html,
+body {
+  overflow-x: clip;
+}
 body {
   background: var(--color-background-full);
   color: var(--color-text-primary);
@@ -369,6 +375,11 @@ body {
   position: absolute;
   inset: var(--glow-radius);
   border-radius: inherit;
+}
+/* The bloom box overhangs the card by --glow-radius. Touch devices never
+ * trigger the glow, so drop it there: it would only widen the page. */
+@media (hover: none) {
+  .border-glow-bloom { display: none; }
 }
 
 /* Dot-matrix words (home hero) -----------------------------------------------
