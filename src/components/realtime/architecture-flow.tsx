@@ -3,18 +3,17 @@
 import { motion } from "motion/react";
 import { useReducedMotion } from "@/components/site/use-reduced-motion";
 import { Fragment } from "react";
-import { RiCpuLine, RiDashboard3Line, RiGlassesLine, RiIdCardLine } from "@remixicon/react";
+import { RiCpuLine, RiDashboard3Line, RiIdCardLine } from "@remixicon/react";
 import { Stagger, StaggerItem } from "@/components/site/motion";
 
 const NODES = [
   { icon: RiIdCardLine, title: "Smart badge", sub: "Positioning sensors" },
   { icon: RiCpuLine, title: "Edge engine", sub: "Real-time processing" },
-  { icon: RiGlassesLine, title: "AR glasses", sub: "Visual overlay" },
   { icon: RiDashboard3Line, title: "Organizer dashboard", sub: "Insights & ROI" },
 ];
-const EDGES = ["Spatial signal", "Identity data", "Analytics"];
+const EDGES = ["Spatial signal", "Analytics"];
 
-/** Badge → Edge → Glasses → Dashboard, with packets travelling along each link. */
+/** Badge → Edge → Dashboard, with packets travelling along each link. */
 export function ArchitectureFlow() {
   const reduce = useReducedMotion();
   return (

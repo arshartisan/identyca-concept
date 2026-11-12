@@ -523,12 +523,6 @@ body {
 @keyframes why2-fill { 0%, 100% { transform: scaleX(0.3); } 50% { transform: scaleX(0.82); } }
 @keyframes why2-knob { 0%, 100% { left: calc(30% - 8px); } 50% { left: calc(82% - 8px); } }
 @keyframes why2-cursor { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(96px, 0); } }
-/* Scale: beacons light up in sequence */
-.why2-beacon { animation: why2-beacon 2.4s ease-in-out infinite; }
-@keyframes why2-beacon {
-  0%, 60%, 100% { background-color: #56565e; box-shadow: none; }
-  20% { background-color: var(--color-signal); box-shadow: 0 0 18px 2px var(--color-signal-glow); }
-}
 /* Deploy: the device swings gently on its line */
 .why2-swing { transform-origin: 50% 0; animation: why2-swing 5s ease-in-out infinite; }
 /* rotate only: Tailwind v4 centres it with the separate `translate` property */

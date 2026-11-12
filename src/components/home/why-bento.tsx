@@ -11,8 +11,8 @@ import { BorderGlow } from "@/components/foundations/border-glow/border-glow";
 import { cx } from "@/utils/cx";
 
 /**
- * "Why Identyca": four reasons as a bento of flat, edge-bleeding illustrations
- * (ROI calculator phone, big scale stat, deploy dial, lifecycle flow).
+ * "Why Identyca": three reasons as a bento of flat, edge-bleeding illustrations
+ * (ROI calculator phone, deploy dial, lifecycle flow).
  * Loops pause off-screen (`bento-paused`) and stop under reduced motion
  * (`bento-visual`). `data-shot` marks close-up targets for the showcase recorder.
  */
@@ -111,31 +111,14 @@ function RoiPhone() {
   );
 }
 
-/* --------------------------------------------------- 2. Scale stat */
-
-function ScalePills() {
-  return (
-    <div aria-hidden className="bento-visual pointer-events-none absolute inset-x-0 top-6">
-      <div className={cx("relative -start-6 flex h-12 w-[88%] items-center justify-end gap-2 rounded-full pe-1.5", G3)}>
-        <span className="why2-beacon size-3 rounded-full bg-[#56565e]" style={{ animationDelay: "0s" }} />
-        <span className="why2-beacon size-5 rounded-full bg-[#56565e]" style={{ animationDelay: "0.25s" }} />
-        <span className="why2-beacon size-9 rounded-full bg-[#56565e]" style={{ animationDelay: "0.5s" }} />
-      </div>
-      <div className={cx("relative -start-6 mt-3 flex h-12 w-[34%] items-center justify-end rounded-full pe-1.5", G3)}>
-        <span className="why2-beacon size-9 rounded-full bg-[#56565e]" style={{ animationDelay: "0.75s" }} />
-      </div>
-    </div>
-  );
-}
-
-/* --------------------------------------------------- 3. Deploy dial */
+/* --------------------------------------------------- 2. Deploy dial */
 
 function DeployDial() {
   const ticks = Array.from({ length: 11 }, (_, i) => -75 + i * 15);
   return (
     <div aria-hidden className="bento-visual pointer-events-none absolute inset-0">
       {/* dial, mostly above the card: only its lower arc shows */}
-      <div className={cx("absolute start-1/2 -top-[120%] aspect-square w-[150%] -translate-x-1/2 rounded-full", G2)}>
+      <div className={cx("absolute start-1/2 -top-[360px] aspect-square w-[525px] -translate-x-1/2 rounded-full", G2)}>
         {ticks.map((a) => (
           <span key={a} className="absolute start-1/2 top-1/2 h-1/2 w-0.5 origin-top" style={{ transform: `rotate(${a}deg)` }}>
             <span className={cx("absolute bottom-3 start-0 h-5 w-0.5 rounded-full", a === 0 ? "bg-signal" : "bg-[#4a4a52]")} />
@@ -155,7 +138,7 @@ function DeployDial() {
   );
 }
 
-/* ------------------------------------------------ 4. Lifecycle flow */
+/* ------------------------------------------------ 3. Lifecycle flow */
 
 function LifecycleFlow() {
   // Kept in the lower part of the card (y >= 175 of 320) so it never runs under the text block.
@@ -196,7 +179,7 @@ function LifecycleFlow() {
 export function WhyBento({ reasons, demoHref }: { reasons: Reason[]; demoHref: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const active = useInView(ref, { amount: 0.05 });
-  const [roi, stage, scale, deploy] = reasons;
+  const [roi, stage, , deploy] = reasons;
 
   return (
     <div ref={ref} className={cx("flex flex-col gap-12 sm:gap-14", !active && "bento-paused")}>
@@ -206,7 +189,7 @@ export function WhyBento({ reasons, demoHref }: { reasons: Reason[]; demoHref: s
           eyebrow="Why Identyca"
           title={
             <>
-              Four reasons teams <Accent>switch</Accent>.
+              Three reasons teams <Accent>switch</Accent>.
             </>
           }
           lead="One of the only event platforms where the return is calculable before sign-up - across the whole event lifecycle."
@@ -233,19 +216,12 @@ export function WhyBento({ reasons, demoHref }: { reasons: Reason[]; demoHref: s
           <RoiPhone />
         </Card>
 
-        {/* 2. Scale: big stat */}
-        <Card href={scale.link.href} label={`${scale.title} - ${scale.link.label}`} className="h-[300px] md:h-auto">
-          <ScalePills />
-          <div className="absolute inset-x-7 bottom-7 z-10 flex flex-col gap-2">
-            <span className="text-[clamp(4rem,3rem+3vw,5.75rem)] leading-[0.9] font-semibold tracking-[-0.05em] text-text-primary">50K</span>
-            <span className="max-w-[32ch] text-body-regular text-text-secondary">
-              People on one beacon network - the same network load as 500. {scale.title}.
-            </span>
-          </div>
-        </Card>
-
-        {/* 3. Deploy: dial */}
-        <Card href={deploy.link.href} label={`${deploy.title} - ${deploy.link.label}`} className="h-[300px] md:h-auto">
+        {/* 2. Deploy: dial (fills the top row beside ROI) */}
+        <Card
+          href={deploy.link.href}
+          label={`${deploy.title} - ${deploy.link.label}`}
+          className="h-[300px] md:row-span-2 md:h-auto lg:col-span-2 lg:row-span-1"
+        >
           <DeployDial />
           <div className="absolute inset-x-7 bottom-7 z-10 flex flex-col gap-1">
             <h3 className="text-title-1-semibold tracking-[-0.02em] text-text-primary">Live in 48 hours</h3>
@@ -253,7 +229,7 @@ export function WhyBento({ reasons, demoHref }: { reasons: Reason[]; demoHref: s
           </div>
         </Card>
 
-        {/* 4. Every stage: wide flow card */}
+        {/* 3. Every stage: wide flow card */}
         <Card
           href={stage.link.href}
           label={`${stage.title} - ${stage.link.label}`}

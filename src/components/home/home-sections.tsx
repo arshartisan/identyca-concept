@@ -102,7 +102,6 @@ export function Numbers() {
 
 const ROWS: [string, string, string, string][] = [
   ["Real-time attendee location", "30–50 cm accuracy", "-", "-"],
-  ["Hands-free networking overlay", "AR + mobile app", "QR scan only", "-"],
   ["AI sponsor matching", "Fit-scored shortlist", "-", "Manual research"],
   ["Indoor wayfinding", "Turn-by-turn via beacons", "Static floor maps only", "-"],
   ["Crowd density and zone analytics", "Real-time by zone", "-", "-"],
