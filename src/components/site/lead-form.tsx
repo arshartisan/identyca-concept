@@ -81,7 +81,7 @@ export function LeadForm({ defaultType = "demo" }: { defaultType?: LeadType }) {
           </span>
           <h2 className="text-title-1-semibold text-text-primary">You&apos;re on the list!</h2>
           <p className="max-w-sm text-body-regular text-text-secondary">
-            Thanks — we&apos;ll reach out to <strong className="text-text-primary">{email}</strong> within 24 hours.
+            Thanks - we&apos;ll reach out to <strong className="text-text-primary">{email}</strong> within 24 hours.
           </p>
         </motion.div>
       ) : (
@@ -152,7 +152,7 @@ export function LeadForm({ defaultType = "demo" }: { defaultType?: LeadType }) {
               {formError}
             </p>
           ) : null}
-          <Button type="submit" disabled={status === "sending"} trailingIcon={RiArrowRightLine} className="h-11 w-full rounded-full">
+          <Button variant="glow" type="submit" disabled={status === "sending"} trailingIcon={RiArrowRightLine} className="h-12 w-full rounded-full">
             {status === "sending" ? "Sending…" : "Submit"}
           </Button>
           <p className="text-center text-caption-1-medium text-text-tertiary">

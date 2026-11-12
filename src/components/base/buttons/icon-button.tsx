@@ -33,7 +33,7 @@ export interface IconButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   icon: IconComponent;
   size?: IconButtonSize;
-  /** Accessible name — required since there is no visible label. */
+  /** Accessible name - required since there is no visible label. */
   "aria-label": string;
   ref?: Ref<HTMLButtonElement>;
 }
@@ -42,14 +42,14 @@ export interface IconLinkButtonProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children"> {
   icon: IconComponent;
   size?: IconButtonSize;
-  /** Accessible name — required since there is no visible label. */
+  /** Accessible name - required since there is no visible label. */
   "aria-label": string;
   ref?: Ref<HTMLAnchorElement>;
 }
 
 const styles = sortCx({
   base: [
-    "relative inline-flex shrink-0 items-center justify-center overflow-visible rounded-2lg",
+    "relative inline-flex shrink-0 items-center justify-center overflow-visible rounded-full",
     "bg-background-primary-default text-foreground-icon-primary",
     "border border-border-button-default shadow-xs",
     "select-none cursor-pointer",

@@ -8,7 +8,7 @@ type IconComponent = RemixiconComponentType;
 
 /**
  * Marketing CTA: BoardUI's button variants on a Next <Link>, plus a roomier
- * pill size for heroes. External/mailto hrefs render a plain anchor.
+ * size for heroes. `primary` renders the glow variant. External/mailto hrefs render a plain anchor.
  */
 export function Cta({
   href,
@@ -29,7 +29,7 @@ export function Cta({
 }) {
   const classes = cx(
     buttonStyles.base,
-    buttonStyles.variant[variant],
+    buttonStyles.variant[variant === "primary" ? "glow" : variant],
     "group/cta rounded-full",
     size === "lg" ? "h-12 gap-1.5 px-5 text-headline-medium" : "h-10 gap-1 px-4 text-body-medium",
     className,

@@ -27,7 +27,7 @@ import { directionalIconClass } from "@/utils/directional-icon";
  *   text style          Body 1/Medium             Body 1/Medium            Caption 1/Semibold
  *   icon-only square    36×36 (content-derived)   32×32 (forced size)      24×24 (forced size)
  *
- * `xs` is the smallest tier — first needed for the calendar template's
+ * `xs` is the smallest tier - first needed for the calendar template's
  * event-details modal ("Join" / edit-icon buttons, node 3920:10954), which
  * scales every dimension down by the same ~0.667 factor from Figma; the
  * table above rounds those to clean pixel values rather than reproducing
@@ -44,7 +44,7 @@ import { directionalIconClass } from "@/utils/directional-icon";
  * `variant` to avoid the clash.
  */
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "glow";
 type ButtonSize = "medium" | "small" | "xs";
 
 type IconComponent = ComponentType<{
@@ -83,21 +83,21 @@ const styles = sortCx({
     "disabled:cursor-not-allowed aria-disabled:cursor-not-allowed",
   ].join(" "),
 
-  // Base shape per size (used when label is present OR medium icon-only).
+  // Base shape per size (used when label is present OR medium icon-only). Site-wide: pill shaped.
   size: {
-    medium: "h-9 rounded-2lg p-2 text-body-medium",
-    small:  "h-8 rounded-lg px-2 py-1.5 text-body-medium",
-    xs:     "h-6 rounded-sm px-2 text-caption-1-semibold",
+    medium: "h-9 rounded-full px-3.5 py-2 text-body-medium",
+    small:  "h-8 rounded-full px-3 py-1.5 text-body-medium",
+    xs:     "h-6 rounded-full px-2.5 text-caption-1-semibold",
   },
 
   // Icon-only override:
   //   Medium → keep p-2; w expands from content (8+20+8 = 36) → square.
   //   Small  → Figma forces 32×32 even though 8+18+8=34, so we hard-set size-8
   //            and zero the padding; the inner flex centers the 18px icon.
-  //   Xs     → forces 24×24, content-centered — used for the calendar
+  //   Xs     → forces 24×24, content-centered - used for the calendar
   //            template's edit-icon buttons (timezone/participants/reminder).
   iconOnlySize: {
-    medium: "",                // base size already produces 36×36 with a 20px icon
+    medium: "px-2",            // back to p-2 → 36×36 circle with a 20px icon
     small:  "size-8 p-0",      // hard 32×32, content-centered
     xs:     "size-6 p-0",      // hard 24×24, content-centered
   },
@@ -133,6 +133,8 @@ const styles = sortCx({
       "disabled:bg-background-primary-disabled disabled:border-border-button-default disabled:text-text-tertiary disabled:shadow-none",
       "aria-disabled:bg-background-primary-disabled aria-disabled:border-border-button-default aria-disabled:text-text-tertiary aria-disabled:shadow-none",
     ].join(" "),
+    // Near-black body with a lit accent rim climbing from the bottom edge (styles/brand.css → .button-glow).
+    glow: "button-glow text-white disabled:opacity-60 aria-disabled:opacity-60",
     ghost: [
       "bg-button-ghost-background text-button-ghost-foreground",
       "hover:bg-button-ghost-hover active:bg-button-ghost-active",
