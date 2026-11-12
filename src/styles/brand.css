@@ -474,17 +474,43 @@ body {
 }
 
 /* Why Identyca line-art bento ---------------------------------------------- */
-.why-coil {
+/* ROI bars grow up from the plate; trend line draws, holds, resets */
+.why-bar {
   transform-box: fill-box;
-  transform-origin: center;
-  animation: why-coil 3.6s ease-in-out infinite;
+  transform-origin: bottom;
+  animation: why-bar 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.why-draw {
+  stroke-dasharray: 100;
+  animation: why-draw 6s ease-in-out infinite;
+}
+.why-draw-head {
+  animation: why-draw-head 6s ease-in-out infinite;
+}
+.why-twinkle {
+  animation: why-twinkle 3.2s ease-in-out infinite;
 }
 .why-float {
   animation: why-float 6s ease-in-out infinite;
 }
-@keyframes why-coil {
-  0%, 100% { transform: scaleX(1); }
-  50% { transform: scaleX(0.8); }
+@keyframes why-bar {
+  0% { transform: scaleY(0.15); opacity: 0.4; }
+  18%, 88% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0.15); opacity: 0.4; }
+}
+@keyframes why-draw {
+  0%, 12% { stroke-dashoffset: 100; }
+  42%, 88% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 100; }
+}
+@keyframes why-draw-head {
+  0%, 38% { opacity: 0; }
+  44%, 88% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes why-twinkle {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
 }
 @keyframes why-float {
   0%, 100% { transform: translateY(0); }
