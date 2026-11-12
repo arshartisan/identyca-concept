@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, JetBrains_Mono, Manrope } from "next/font/google";
+import { JetBrains_Mono, Manrope } from "next/font/google";
 import "@/styles/app.css";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -9,14 +9,6 @@ import { MotionProvider } from "@/components/site/motion-provider";
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -51,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       // The site is dark-only: BoardUI's dark tokens are always on.
-      className={`dark ${manrope.variable} ${instrumentSerif.variable} ${mono.variable} antialiased`}
+      className={`dark ${manrope.variable} ${mono.variable} antialiased`}
     >
       <body className="flex min-h-dvh flex-col bg-background-full font-sans text-text-primary">
         <MotionProvider>

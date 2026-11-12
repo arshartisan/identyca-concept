@@ -87,7 +87,7 @@ async function PostContent({ params }: { params: PageProps<"/insights/[slug]">["
               </Reveal>
               <Reveal delay={0.08}>
                 <h1 className="text-section text-balance text-text-primary">
-                  <span className="font-serif font-normal tracking-[-0.025em]">{post.title}</span>
+                  <span className="tracking-[-0.025em]">{post.title}</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.14}>

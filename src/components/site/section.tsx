@@ -90,7 +90,7 @@ export function SectionHeading({
   );
 }
 
-/** Serif italic accent word for headlines. */
+/** Accent word for headlines (sans, inherits the headline style). */
 export function Accent({ children, className }: { children: ReactNode; className?: string }) {
   return <em className={cx("font-accent", className)}>{children}</em>;
 }

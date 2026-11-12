@@ -156,7 +156,7 @@ export default function EventIntelligencePage() {
             <VideoPlayer src={VIDEOS.organizerWalkthrough} poster="/images/poster-ei-v2.jpg" title="Event Organizer Intelligence explainer" />
           </Reveal>
           <Reveal className="mx-auto mt-16 max-w-3xl text-center">
-            <blockquote className="font-serif text-[clamp(1.75rem,1.3rem+1.8vw,2.75rem)] leading-[1.12] tracking-[-0.01em] text-text-primary">
+            <blockquote className="font-sans text-[clamp(1.75rem,1.3rem+1.8vw,2.75rem)] leading-[1.12] tracking-[-0.01em] text-text-primary">
               “Identyca turned two months of desk research into a single afternoon of decisions. We closed two anchor
               sponsors from its top ten list.”
             </blockquote>

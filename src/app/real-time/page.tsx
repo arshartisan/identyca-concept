@@ -94,7 +94,7 @@ export default function RealtimePage() {
             ]}
           />
           <Reveal className="mx-auto mt-20 max-w-3xl text-center">
-            <p className="font-serif text-[clamp(2rem,1.4rem+2.6vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-text-primary">
+            <p className="font-sans text-[clamp(2rem,1.4rem+2.6vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-text-primary">
               “A hands-free LinkedIn in the physical world.”
             </p>
           </Reveal>

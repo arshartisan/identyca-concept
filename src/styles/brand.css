@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * Identyca brand layer - sits on top of BoardUI (imported after globals.css).
  *
- *  - Swaps the family to Manrope (sans) + Instrument Serif (display accents)
+ *  - Swaps the family to Manrope (sans); headings use no serif faces
  *  - Adds fluid marketing type utilities (BoardUI's ramp stops at 64px)
  *  - Warms the light page ground to "paper", deepens the dark one to "ink"
  *  - Adds a handful of semantic marketing tokens (hairline, grid, signal)
@@ -12,7 +12,7 @@
 
 @theme {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), "Iowan Old Style", Georgia, serif;
+  --font-serif: var(--font-sans);
 
   /* Fluid marketing ramp ---------------------------------------------------- */
   --text-hero: clamp(2.75rem, 1.6rem + 5.4vw, 6.25rem);
@@ -150,12 +150,10 @@
 
 /* Utilities ----------------------------------------------------------------- */
 
-/* Serif italic accent words inside sans headlines */
+/* Accent words inside headlines - same sans face as the headline */
 @utility font-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
+  font-style: normal;
 }
 
 @utility eyebrow {

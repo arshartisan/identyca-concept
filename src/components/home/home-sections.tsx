@@ -241,7 +241,7 @@ export function Testimonials() {
             <StaggerItem key={t.a} className="h-full">
               <BorderGlow className="h-full">
               <figure className="flex h-full flex-col justify-between gap-8 rounded-3xl border border-border-hairline bg-background-elevated p-7 sm:p-8">
-              <blockquote className="font-serif text-[1.625rem] leading-[1.2] tracking-[-0.01em] text-text-primary">
+              <blockquote className="font-sans text-[1.625rem] leading-[1.2] tracking-[-0.01em] text-text-primary">
                 “{t.q}”
               </blockquote>
               <figcaption className="eyebrow text-text-tertiary">- {t.a}</figcaption>
