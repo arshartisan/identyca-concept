@@ -14,7 +14,7 @@ import { RiAddLine, RiArrowDownSLine } from "@remixicon/react";
 import { cx, sortCx } from "@/utils/cx";
 
 /**
- * Accordion — stacked sections that expand in place: FAQs, settings groups,
+ * Accordion - stacked sections that expand in place: FAQs, settings groups,
  * order details. Built on React Aria's DisclosureGroup and Disclosure, so
  * each header is a real button with aria-expanded, and a collapsed panel is
  * `hidden="until-found"`: find-in-page still reaches its text and opens it.

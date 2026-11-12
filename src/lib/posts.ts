@@ -11,7 +11,7 @@ export type PostSummary = Omit<Post, "body" | "blocks" | "headings">;
 
 const WORDS_PER_MINUTE = 230;
 
-/** Parsed once at module load — content is static. Newest first. */
+/** Parsed once at module load - content is static. Newest first. */
 const POSTS: Post[] = POST_SOURCES.map((p) => {
   const blocks = parseMarkdown(p.body);
   return {

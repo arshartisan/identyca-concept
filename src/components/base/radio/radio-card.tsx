@@ -7,7 +7,7 @@ import { cx } from "@/utils/cx";
 import { RadioDot } from "./radio";
 
 /**
- * Selectable radio card — the radio flavor of CheckboxCard (Figma checkbox
+ * Selectable radio card - the radio flavor of CheckboxCard (Figma checkbox
  * items, node 3793:2966): title + optional description on the left, the
  * radio dot on the right.
  *   card    radius/2lg (10px), 1px border/button/default, pl 16 pr 20 py 12

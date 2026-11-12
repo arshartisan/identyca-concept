@@ -1,7 +1,7 @@
 import type { Tier } from "./types";
 
 /**
- * Identyca platform fees — USD per event, badges included.
+ * Identyca platform fees - USD per event, badges included.
  * Pricing as of October 2026 (70% badge-retrieval scenario).
  * Upper bounds are inclusive.
  */

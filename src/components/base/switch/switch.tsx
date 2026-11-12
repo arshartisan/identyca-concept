@@ -9,8 +9,8 @@ import { cx, sortCx } from "@/utils/cx";
  * Figma source: Board UI → "Toogles" (node 3856:3807).
  *
  * Two shapes × three sizes, plus off / on:
- *   shape   pill        (Figma "fully rounded") — track & thumb rounded-full
- *           rectangle   (Figma "rectangle")     — track radius/md-scale, thumb radius/xs-scale
+ *   shape   pill        (Figma "fully rounded") - track & thumb rounded-full
+ *           rectangle   (Figma "rectangle")     - track radius/md-scale, thumb radius/xs-scale
  *   size    sm 28×16 · md 42×24 · lg 56×32   (track w×h; thumb = h − 2·pad)
  *
  * Anatomy (all values 1:1 with Figma):
@@ -79,7 +79,7 @@ export interface SwitchVisualState {
 }
 
 /**
- * The track + thumb + chip visual. Pure presentation — the react-aria Switch
+ * The track + thumb + chip visual. Pure presentation - the react-aria Switch
  * (in `Switch` or `SwitchCard`) owns the input and passes its render state in.
  */
 export function SwitchTrack({
@@ -120,8 +120,8 @@ export function SwitchTrack({
           state.isSelected && s.travel,
         )}
       >
-        {/* Embossed inner chip. Gradient runs bottom→top (`to-t`) — equivalent
-            to the Figma layer's vertical flip — but WITHOUT a transform, so the
+        {/* Embossed inner chip. Gradient runs bottom→top (`to-t`) - equivalent
+            to the Figma layer's vertical flip - but WITHOUT a transform, so the
             chip stays pixel-snapped/centred (no blurry 1px shift at sub-pixel
             sizes) and its drop shadow points down instead of up. */}
         <span

@@ -21,23 +21,23 @@ import {
 import { cx, sortCx } from "@/utils/cx";
 
 /**
- * Multiline sibling of `Input` — same React Aria plumbing, same field shell,
+ * Multiline sibling of `Input` - same React Aria plumbing, same field shell,
  * same tokens. It reuses `Input`'s `TextField`, `Label` and `HintText`, so a
  * textarea sitting next to an input in a form lines up to the pixel.
  *
  * Architecture (mirrors input.tsx):
  *
- *   TextareaBase — the styled shell. Renders <AriaGroup> + <AriaTextArea>.
+ *   TextareaBase - the styled shell. Renders <AriaGroup> + <AriaTextArea>.
  *                  State (hover / focus / disabled / invalid) arrives as
  *                  render-prop booleans from Aria.
- *   Textarea     — opinionated composition: TextField → Label → TextareaBase
+ *   Textarea     - opinionated composition: TextField → Label → TextareaBase
  *                  → HintText (+ optional character counter). The component
  *                  most consumers use.
  *
  * What a textarea adds over the single-line field:
  *   - `rows` sets the resting height (3 lines by default)
  *   - `autoResize` grows the field a line at a time up to `maxRows`, then
- *     scrolls — the pattern the composer prompt uses
+ *     scrolls - the pattern the composer prompt uses
  *   - `resize` exposes the native grab handle, off when `autoResize` is on
  *   - `showCount` pairs with `maxLength` for the counter settings pages want
  */

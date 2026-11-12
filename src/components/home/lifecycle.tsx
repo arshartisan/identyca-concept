@@ -18,7 +18,7 @@ const PHASES = [
       },
       {
         title: "Sponsor, speaker, venue & price sourcing",
-        body: "AI-matched shortlists for sponsors, speakers, venues and pricing benchmarks — all fit-scored against your brief.",
+        body: "AI-matched shortlists for sponsors, speakers, venues and pricing benchmarks - all fit-scored against your brief.",
         product: "Event Intelligence",
       },
     ],
@@ -28,7 +28,7 @@ const PHASES = [
     stages: [
       {
         title: "Registration & badging",
-        body: "Smart badge issuance, delegate registration and real-time check-in — all in one system.",
+        body: "Smart badge issuance, delegate registration and real-time check-in - all in one system.",
         product: "Real-time",
       },
       {
@@ -43,7 +43,7 @@ const PHASES = [
     stages: [
       {
         title: "Wayfinding & crowd intelligence",
-        body: "Indoor navigation, zone occupancy, F&B queue alerts and gamification — powered by permanent beacons.",
+        body: "Indoor navigation, zone occupancy, F&B queue alerts and gamification - powered by permanent beacons.",
         product: "Spaces",
       },
     ],
@@ -82,7 +82,7 @@ export function Lifecycle() {
               From first planning call to <Accent>post-event</Accent> analytics.
             </>
           }
-          lead="Identyca is the only platform that covers every stage — before, during and after your event."
+          lead="Identyca is the only platform that covers every stage - before, during and after your event."
         />
 
         <div ref={ref} className="relative mt-16">

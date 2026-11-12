@@ -11,7 +11,7 @@ import { Label } from "@/components/base/input/label";
 import { cx } from "@/utils/cx";
 
 /**
- * Number field — a number typed or stepped: seats, a price, a percentage,
+ * Number field - a number typed or stepped: seats, a price, a percentage,
  * a weight.
  *
  *   <NumberField label="Seats" defaultValue={5} minValue={1} maxValue={50} />

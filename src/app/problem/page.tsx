@@ -33,10 +33,10 @@ const GROUPS: {
     items: [
       { title: "Invisible identities", body: "Paper badges flip over, hide under jackets, or are simply too small to read from a polite distance.", stat: "~70% of badges are unreadable at 2 m" },
       { title: "Wasted sponsor ROI", body: "Exhibitors spend hours on unqualified traffic while key decision-makers walk right past their booth.", stat: "Sponsors report 60%+ of conversations are irrelevant" },
-      { title: "Missed connections", body: "The five people who could transform your business are in that room — you just can't find them.", stat: "83% leave with fewer contacts than planned" },
+      { title: "Missed connections", body: "The five people who could transform your business are in that room - you just can't find them.", stat: "83% leave with fewer contacts than planned" },
       { title: "App friction", body: "Pulling out your phone to scan QR codes destroys eye contact and kills conversation momentum.", stat: "QR-based apps see under 20% adoption" },
       { title: "No real-time discovery", body: "Current tools are passive. Nothing proactively surfaces who is standing right next to you, right now.", stat: "Every major networking app requires manual search" },
-      { title: "Time wasted", body: "The average attendee spends 40% of their networking time in unproductive conversations.", stat: "$4,000+ per attendee in event costs — largely wasted" },
+      { title: "Time wasted", body: "The average attendee spends 40% of their networking time in unproductive conversations.", stat: "$4,000+ per attendee in event costs - largely wasted" },
     ],
     cta: { label: "See Identyca Real-time", href: "/real-time" },
   },
@@ -48,12 +48,12 @@ const GROUPS: {
         Event planning is fragmented and <Accent>blind</Accent>.
       </>
     ),
-    lead: "Organizers spend weeks on research that should take hours — juggling spreadsheets, cold emails and guesswork with no live data to guide decisions.",
+    lead: "Organizers spend weeks on research that should take hours - juggling spreadsheets, cold emails and guesswork with no live data to guide decisions.",
     items: [
-      { title: "Fragmented planning tools", body: "Dozens of disconnected tools — spreadsheets, email threads, vendor portals — and no single source of truth.", stat: "7+ disconnected tools per event" },
+      { title: "Fragmented planning tools", body: "Dozens of disconnected tools - spreadsheets, email threads, vendor portals - and no single source of truth.", stat: "7+ disconnected tools per event" },
       { title: "Sponsor discovery is manual", body: "Cold outreach, trade directories and gut instinct. No data-driven matching between events and sponsors.", stat: "80%+ of sponsor outreach goes unanswered" },
       { title: "Speaker sourcing is guesswork", body: "Reputation and word of mouth. No way to match speakers to audience intent or benchmark against competing events.", stat: "60% say speaker sourcing takes 4+ weeks" },
-      { title: "No competitive intelligence", body: "No visibility into what competing events are doing — pricing, dates, speakers — until it's too late to react.", stat: "Conflicting dates lose 30%+ of potential sponsors" },
+      { title: "No competitive intelligence", body: "No visibility into what competing events are doing - pricing, dates, speakers - until it's too late to react.", stat: "Conflicting dates lose 30%+ of potential sponsors" },
       { title: "Pricing set in the dark", body: "Ticket and sponsorship pricing set on gut feel or last year's numbers, with no live market benchmarks.", stat: "Most events leave 20–40% of revenue on the table" },
       { title: "Vendors lack a discovery channel", body: "AV firms, caterers, agencies and hotels have no structured way to find and pitch relevant events.", stat: "Vendor pipelines are 90% relationship-dependent" },
     ],
@@ -72,7 +72,7 @@ const GROUPS: {
       { title: "Organisers shortlist on technology", body: "The modern event buyer expects intelligent infrastructure. A smart floor plan is now a competitive differentiator." },
       { title: "No real-time context", body: "Your venue team can't see where people are, where zones are filling, or where problems are forming." },
       { title: "Networking fails at scale", body: "Without spatial intelligence, delegates leave large B2B events with fewer connections than they expected." },
-      { title: "Guests get lost", body: "Indoor navigation is unsolved for most venues — guests miss sessions, exhibitors and F&B." },
+      { title: "Guests get lost", body: "Indoor navigation is unsolved for most venues - guests miss sessions, exhibitors and F&B." },
       { title: "Venue data is missing", body: "Occupancy, flow, dwell time and dead zones should be standard. Instead: surveys and intuition." },
       { title: "Expos need experiences", body: "Gamification, location-triggered activations and crowd intelligence need a live floor layer." },
     ],
@@ -87,7 +87,7 @@ export default function ProblemPage() {
         eyebrow="The problem"
         title={
           <>
-            Events are full of people who <Accent>should</Accent> meet — and don&apos;t.
+            Events are full of people who <Accent>should</Accent> meet - and don&apos;t.
           </>
         }
         lead="Three structural failures sit underneath every conference: on the floor, at the planning table, and inside the venue itself."

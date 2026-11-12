@@ -28,13 +28,13 @@ import { cx, sortCx } from "@/utils/cx";
  *
  * Architecture (mirrors the Untitled UI / React Aria pattern):
  *
- *   InputBase   — the styled field shell. Renders <AriaGroup> + adornments
+ *   InputBase   - the styled field shell. Renders <AriaGroup> + adornments
  *                 + <AriaInput>. State (hover / focus / disabled / invalid)
  *                 arrives as render-prop booleans from Aria.
- *   TextField   — wraps <AriaTextField> and a TextFieldContext so size /
+ *   TextField   - wraps <AriaTextField> and a TextFieldContext so size /
  *                 classes can flow from the composer down into InputBase
  *                 without prop drilling.
- *   Input       — opinionated composition: TextField → Label → InputBase
+ *   Input       - opinionated composition: TextField → Label → InputBase
  *                 → HintText, or React Aria's FieldError for `errorMessage`
  *                 while the field is invalid. The component most consumers use.
  *
@@ -44,9 +44,9 @@ import { cx, sortCx } from "@/utils/cx";
  *   - Form library / native validation integration
  *   - i18n, RTL, autofill edge cases handled
  *   - Render-prop state surfaces `isFocusWithin`, `isHovered`, `isDisabled`,
- *     `isInvalid`, `isRequired` — no CSS pseudo gymnastics
+ *     `isInvalid`, `isRequired` - no CSS pseudo gymnastics
  *
- * Visuals stay 1:1 with Figma — see `styles/theme.css` for the tokens.
+ * Visuals stay 1:1 with Figma - see `styles/theme.css` for the tokens.
  */
 
 export type InputSize = "medium" | "small";
@@ -67,7 +67,7 @@ export interface TextFieldContextValue {
 }
 
 /**
- * Shared by every field that wants Input's shell — `Textarea` reads the same
+ * Shared by every field that wants Input's shell - `Textarea` reads the same
  * size and class overrides out of it, so a composed form stays consistent.
  */
 export const TextFieldContext = createContext<TextFieldContextValue>({});

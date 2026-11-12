@@ -5,7 +5,7 @@ import { ProgressBar as AriaProgressBar } from "react-aria-components";
 import { cx } from "@/utils/cx";
 
 /**
- * Spinner — an orbiting light for work of unknown length.
+ * Spinner - an orbiting light for work of unknown length.
  *
  *   <Spinner />                                  // 20px, accent
  *   <Spinner size="sm" className="text-white" /> // inside a primary button

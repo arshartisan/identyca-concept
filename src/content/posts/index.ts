@@ -32,9 +32,9 @@ export type PostSource = {
 export const POST_SOURCES: PostSource[] = [
   {
     slug: "ai-ending-organizer-research",
-    title: "Why Conference Organizers Spend 40% of Their Time on Research — And How AI Is Ending That",
+    title: "Why Conference Organizers Spend 40% of Their Time on Research - And How AI Is Ending That",
     description:
-      "Conference organizers lose nearly half their planning time to manual research. AI-powered Event Intelligence platforms are changing that — here's how.",
+      "Conference organizers lose nearly half their planning time to manual research. AI-powered Event Intelligence platforms are changing that - here's how.",
     category: "Event Intelligence",
     date: "2026-10-05",
     dateLabel: "5 Oct 2026",
@@ -55,7 +55,7 @@ export const POST_SOURCES: PostSource[] = [
     body: digitalTwin,
     cta: {
       title: "See How It Works",
-      lead: "Explore how Identyca's real-time spatial platform works end-to-end — from smart badge issuance to live AR networking to the Operational Command Center.",
+      lead: "Explore how Identyca's real-time spatial platform works end-to-end - from smart badge issuance to live AR networking to the Operational Command Center.",
       primary: { label: "How It Works", href: "/real-time" },
       secondary: null,
     },

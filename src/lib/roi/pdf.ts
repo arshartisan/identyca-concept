@@ -77,7 +77,7 @@ export async function generateRoiPdf(inputs: RoiInputs, lead: RoiLead, results: 
   const M = 20;
   const CW = PW - 2 * M;
 
-  // PDF palette (print colours — not UI tokens)
+  // PDF palette (print colours - not UI tokens)
   const navy: RGB = [15, 23, 42];
   const blue: RGB = [37, 99, 235];
   const cyan: RGB = [6, 182, 212];
@@ -404,7 +404,7 @@ export async function generateRoiPdf(inputs: RoiInputs, lead: RoiLead, results: 
 
   const dataUri = doc.output("datauristring");
   const base64 = dataUri.slice(dataUri.indexOf(",") + 1);
-  // Never send an empty/garbled PDF — the caller surfaces this as an error.
+  // Never send an empty/garbled PDF - the caller surfaces this as an error.
   if (!base64 || base64.length < 100 || doc.getNumberOfPages() !== totalPages) {
     throw new Error("PDF generation produced an invalid document");
   }

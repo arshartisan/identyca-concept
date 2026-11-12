@@ -25,9 +25,9 @@ import { ModuleExplorer } from "@/components/intelligence/module-explorer";
 import { CONTACT_EMAIL, DEMO_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Event Intelligence — AI-native conference planning",
+  title: "Event Intelligence - AI-native conference planning",
   description:
-    "The AI-native planning workspace for event organizers and the prospecting engine for event vendors — sponsors, speakers, venues, dates and pricing, powered by a global events graph.",
+    "The AI-native planning workspace for event organizers and the prospecting engine for event vendors - sponsors, speakers, venues, dates and pricing, powered by a global events graph.",
 };
 
 const BROCHURE = "https://www.genspark.ai/api/files/s/NSPqZsHv";
@@ -36,8 +36,8 @@ const MODULES = [
   { id: "sponsor", title: "Sponsor Finder", image: "/images/ei/sponsor-finder.png", body: "AI matches likely sponsors from your audience profile, agenda and past comparable events. Every prospect is fit-scored, ranked and comes with an outreach draft ready to send." },
   { id: "speaker", title: "Speaker Discovery", image: "/images/ei/speaker-discovery.png", body: "Surface topic-relevant speakers across your vertical. See full speaking history, how often they appear at comparable events, and an AI rationale for why they fit your programme." },
   { id: "topic", title: "Topic Intelligence", image: "/images/ei/agenda-intelligence.png", body: "Trending themes by vertical, geography and audience segment. Benchmark your agenda against comparable conferences and find the topics competitors cover that you're missing." },
-  { id: "venue", title: "Venue Match", image: "/images/ei/venue-match.png", body: "See which venues have hosted comparable events, with destination context and capacity — an evidence-based shortlist before your first RFP goes out." },
-  { id: "dates", title: "Date Conflict Radar", image: "/images/ei/date-conflict-radar.png", body: "Every industry conference overlapping your target dates, worldwide. Detect audience, sponsor and speaker conflicts before you lock your calendar — and test alternatives instantly." },
+  { id: "venue", title: "Venue Match", image: "/images/ei/venue-match.png", body: "See which venues have hosted comparable events, with destination context and capacity - an evidence-based shortlist before your first RFP goes out." },
+  { id: "dates", title: "Date Conflict Radar", image: "/images/ei/date-conflict-radar.png", body: "Every industry conference overlapping your target dates, worldwide. Detect audience, sponsor and speaker conflicts before you lock your calendar - and test alternatives instantly." },
   { id: "pricing", title: "Pricing Benchmarks", image: "/images/ei/pricing-benchmarks.png", body: "Early bird, standard and VIP delegate pricing benchmarked by vertical, event size and city. Price with current market data, not last year's PDF." },
 ];
 
@@ -78,7 +78,7 @@ export default function EventIntelligencePage() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="text-lead max-w-xl text-text-secondary">
-                The AI-native planning workspace for event organizers and the prospecting engine for event vendors —
+                The AI-native planning workspace for event organizers and the prospecting engine for event vendors -
                 powered by a proprietary global events graph.
               </p>
             </Reveal>
@@ -130,7 +130,7 @@ export default function EventIntelligencePage() {
             className="mt-14"
             items={[
               { icon: RiTimerFlashLine, title: "Weeks → minutes", body: "Research time saved. AI-powered analysis replaces weeks of desk research." },
-              { icon: RiFileSearchLine, title: "Evidence-based", body: "Every recommendation sourced and scored — fit scores, data sources and rationale included with every result." },
+              { icon: RiFileSearchLine, title: "Evidence-based", body: "Every recommendation sourced and scored - fit scores, data sources and rationale included with every result." },
               { icon: RiShieldStarLine, title: "Pre-event intelligence", body: "Decisions made before a budget is committed. Act with confidence at the planning stage, not after." },
             ]}
           />
@@ -149,7 +149,7 @@ export default function EventIntelligencePage() {
                 Watch Event Intelligence <Accent>in action</Accent>.
               </>
             }
-            lead="From event brief to a full sponsor list, speaker recommendations, agenda benchmarks and pricing strategy — in one session."
+            lead="From event brief to a full sponsor list, speaker recommendations, agenda benchmarks and pricing strategy - in one session."
           />
           <Reveal className="mx-auto mt-14 max-w-5xl">
             <VideoPlayer src={VIDEOS.organizerWalkthrough} poster="/images/poster-ei-v2.jpg" title="Event Organizer Intelligence explainer" />
@@ -174,7 +174,7 @@ export default function EventIntelligencePage() {
                 The planning <Accent>brain</Accent> for modern conferences.
               </>
             }
-            lead="Who to approach for sponsorship, which speakers are trending, whether your dates clash, what the market charges — answered before you commit to anything."
+            lead="Who to approach for sponsorship, which speakers are trending, whether your dates clash, what the market charges - answered before you commit to anything."
           />
           <div className="mt-16">
             <ModuleExplorer modules={MODULES} />
@@ -185,7 +185,7 @@ export default function EventIntelligencePage() {
               className="mt-10"
               steps={[
                 { title: "Describe your event", body: "Enter your vertical, target audience, expected delegate size, city and target dates. Takes sixty seconds." },
-                { title: "Review AI recommendations", body: "Fit-scored sponsors, speakers, venues, agenda benchmarks, conflict alerts and pricing tiers — from our global events graph." },
+                { title: "Review AI recommendations", body: "Fit-scored sponsors, speakers, venues, agenda benchmarks, conflict alerts and pricing tiers - from our global events graph." },
                 { title: "Act inside the platform", body: "Send outreach, track your sponsor pipeline, save recommendations and export a full strategy report for your board." },
               ]}
             />
@@ -203,11 +203,11 @@ export default function EventIntelligencePage() {
                 Stop waiting for RFPs. Find the conferences that <Accent>need you</Accent>.
               </>
             }
-            lead="A proactive intelligence feed of upcoming conferences in your region — identify the right events, understand the opportunity and pitch before the RFP lands."
+            lead="A proactive intelligence feed of upcoming conferences in your region - identify the right events, understand the opportunity and pitch before the RFP lands."
           />
           <Stagger className="mt-14 grid gap-4 md:grid-cols-3">
             {[
-              { t: "Reactive, not proactive", b: "Most vendors only learn about events when an RFP arrives — by which point shortlists are forming and relationships are built." },
+              { t: "Reactive, not proactive", b: "Most vendors only learn about events when an RFP arrives - by which point shortlists are forming and relationships are built." },
               { t: "No visibility into scale or budget", b: "Without knowing who sponsors an event, it's almost impossible to gauge its commercial tier or whether you're a realistic fit." },
               { t: "Manual and time-consuming", b: "Searching calendars, LinkedIn and associations takes hours and still produces an incomplete picture." },
             ].map((p) => (
@@ -225,10 +225,10 @@ export default function EventIntelligencePage() {
             className="mt-6"
             columns={4}
             items={[
-              { icon: RiNewsLine, title: "Personalized discovery feed", body: "Upcoming events matched to your service category, geography and event size — only genuinely relevant opportunities." },
+              { icon: RiNewsLine, title: "Personalized discovery feed", body: "Upcoming events matched to your service category, geography and event size - only genuinely relevant opportunities." },
               { icon: RiBuilding4Line, title: "Sponsor signal intelligence", body: "See each event's sponsor profile to gauge its commercial tier and tailor your pitch." },
               { icon: RiSendPlaneLine, title: "Direct organizer pitch tool", body: "Submit a structured service enquiry with your credentials. Organizers receive it as a lead in their dashboard." },
-              { icon: RiInboxLine, title: "Enquiry tracking dashboard", body: "Track every pitch — Sent, Viewed, Responded or Declined — and set watchlist alerts for new matching conferences." },
+              { icon: RiInboxLine, title: "Enquiry tracking dashboard", body: "Track every pitch - Sent, Viewed, Responded or Declined - and set watchlist alerts for new matching conferences." },
             ]}
           />
 
@@ -267,7 +267,7 @@ export default function EventIntelligencePage() {
                 <span className="relative inline-flex rounded-full bg-signal-soft px-2.5 py-1 text-caption-1-semibold text-signal">Coming</span>
                 <h3 className="text-subsection relative mt-4 text-text-primary">The Identyca Sponsorship Marketplace.</h3>
                 <p className="relative mt-4 text-body-regular leading-6 text-text-secondary">
-                  Sponsors register a profile — industry, target audience, geography and typical budget — and our AI matches
+                  Sponsors register a profile - industry, target audience, geography and typical budget - and our AI matches
                   them directly to upcoming conferences that fit. Organizers receive warm, qualified leads from brands that
                   already want their audience. Both sides operate with intelligence instead of instinct.
                 </p>
@@ -329,7 +329,7 @@ export default function EventIntelligencePage() {
           />
           <Stagger className="mx-auto mt-14 grid max-w-4xl gap-4 md:grid-cols-2">
             {[
-              { t: "Organizer demo", b: "A live event project: sponsor recommendations, agenda benchmarking, date conflict detection and a pricing recommendation — for a real brief you bring.", c: "Book organizer demo" },
+              { t: "Organizer demo", b: "A live event project: sponsor recommendations, agenda benchmarking, date conflict detection and a pricing recommendation - for a real brief you bring.", c: "Book organizer demo" },
               { t: "Vendor demo", b: "How Vendor Discovery surfaces upcoming conferences in your region, how to build your service profile, and how to pitch an organizer.", c: "Book vendor demo" },
             ].map((d) => (
               <StaggerItem key={d.t}>
@@ -361,7 +361,7 @@ export default function EventIntelligencePage() {
             Plan smarter. Book better. <Accent>Renew</Accent> every year.
           </>
         }
-        lead="Make faster, more confident decisions — before a single email is sent."
+        lead="Make faster, more confident decisions - before a single email is sent."
         primary={{ label: "Book a 20-minute walkthrough", href: DEMO_HREF }}
         secondary={{ label: "Log in", href: "https://intel.identyca.io/" }}
       />

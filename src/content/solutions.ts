@@ -1,5 +1,5 @@
 /**
- * "By Organization Type" solution pages — copy from content brief §5.
+ * "By Organization Type" solution pages - copy from content brief §5.
  * Slugs match SOLUTION_LINKS in lib/solutions-index.ts (nav + routes).
  *
  * Feature images are kept exactly as the source assigns them (several are

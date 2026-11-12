@@ -198,7 +198,7 @@ export function RoiCalculator() {
                 <span className="text-body-medium text-text-primary">Would you like AR glasses onsite?</span>
                 <Switch isSelected={form.D1} onChange={set("D1")}>
                   <span className="text-body-regular text-text-secondary">
-                    {form.D1 ? "Yes — we will have AR glasses onsite" : "No — no AR glasses onsite"}
+                    {form.D1 ? "Yes - we will have AR glasses onsite" : "No - no AR glasses onsite"}
                   </span>
                 </Switch>
               </div>

@@ -85,12 +85,12 @@ export function Select<T extends object>({
   ...props
 }: SelectProps<T>) {
   // The popover is `isNonModal`: react-aria's modal scroll lock puts
-  // `overflow: hidden` on <html>, which — with this app's `h-full` root —
+  // `overflow: hidden` on <html>, which - with this app's `h-full` root -
   // collapses the page scroll position and visibly yanks the sticky
   // sidebar upward every time a select opens. Non-modal skips the lock,
   // but also disables react-aria's outside-press dismissal (`isDismissable`
   // is hard-coupled to `!isNonModal` in usePopover), so open state is
-  // controlled here and dismissal restored manually — the same fix as the
+  // controlled here and dismissal restored manually - the same fix as the
   // date-picker family (see utils/use-dismiss-on-outside-press.ts).
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLElement>(null);

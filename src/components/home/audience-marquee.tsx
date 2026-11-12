@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SOLUTION_LINKS } from "@/lib/solutions-index";
 
-/** "Built for" strip — stands in for a logo cloud, linking to each solution page. */
+/** "Built for" strip - stands in for a logo cloud, linking to each solution page. */
 export function AudienceMarquee() {
   const items = [...SOLUTION_LINKS, ...SOLUTION_LINKS];
   return (

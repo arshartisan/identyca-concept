@@ -30,7 +30,7 @@ export const PRODUCTS: { title: string; href: string; description: string; icon:
   {
     title: "Event Intelligence",
     href: "/event-intelligence",
-    description: "Sponsors, speakers, venues and dates — researched for you.",
+    description: "Sponsors, speakers, venues and dates - researched for you.",
     icon: RiRadarLine,
   },
   {

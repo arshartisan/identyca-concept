@@ -11,7 +11,7 @@ type PreparedGroup = {
   group: SolutionGroup;
   /** Rows with a screenshot not yet shown on this page. */
   visual: (SolutionFeature & { image: string; n: number })[];
-  /** Rows whose screenshot already appeared — rendered as text cards. */
+  /** Rows whose screenshot already appeared - rendered as text cards. */
   text: SolutionFeature[];
 };
 

@@ -1,4 +1,4 @@
-/** `$12,345` — rounds, en-US thousands. Negative values render `-$12,345`. */
+/** `$12,345` - rounds, en-US thousands. Negative values render `-$12,345`. */
 export function fmtUSD(n: number): string {
   if (n === 0) return "$0";
   const abs = Math.abs(Math.round(n));

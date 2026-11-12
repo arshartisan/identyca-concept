@@ -4,7 +4,7 @@ import { cx } from "@/utils/cx";
 
 /**
  * A deliberately tiny markdown subset for long-form copy (blog posts, legal):
- *   ## heading · paragraphs · "- " lists · "> " quotes (a "> — " line is the
+ *   ## heading · paragraphs · "- " lists · "> " quotes (a "> - " line is the
  *   attribution) · "---" rules · inline **bold**, *italic*, [text](href).
  * Pure functions + server-rendered output; no runtime dependency.
  */
@@ -79,7 +79,7 @@ export function parseMarkdown(md: string): Block[] {
       let cite: string | undefined;
       while (i < lines.length && lines[i].trim().startsWith(">")) {
         const content = lines[i].trim().replace(/^>\s?/, "");
-        if (/^[—-]\s/.test(content)) cite = content.replace(/^[—-]\s/, "");
+        if (/^[--]\s/.test(content)) cite = content.replace(/^[--]\s/, "");
         else body.push(content);
         i++;
       }
@@ -243,7 +243,7 @@ export function Prose({
                   </span>
                 </blockquote>
                 {b.cite ? (
-                  <figcaption className="eyebrow mt-4 text-text-tertiary">— {b.cite}</figcaption>
+                  <figcaption className="eyebrow mt-4 text-text-tertiary">- {b.cite}</figcaption>
                 ) : null}
               </figure>
             );

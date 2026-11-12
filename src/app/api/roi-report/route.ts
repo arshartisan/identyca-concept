@@ -1,11 +1,11 @@
 /**
- * POST /api/roi-report — emails the client-generated ROI report PDF via Resend.
+ * POST /api/roi-report - emails the client-generated ROI report PDF via Resend.
  *
  * Ported from the original Cloudflare Pages Function. Body:
  *   { lead: { name, company, role, email }, inputs, results: { conservative, baseline, aggressive }, pdfBase64 }
  * (pdfBase64 is raw base64, no data: prefix.)
  *
- * Env: RESEND_API_KEY (required — without it the route answers 503 instead of
+ * Env: RESEND_API_KEY (required - without it the route answers 503 instead of
  * pretending success). The original's optional KV lead backup is dropped.
  *
  * Runs on the default Node.js runtime (Cache Components forbids a `runtime` export).
@@ -21,7 +21,7 @@ const CORS = {
 const FROM = "Identyca.io <leads@identyca.io>";
 const INTERNAL_TO = "vibhas@identyca.io";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-/** ~12 MB of base64 — far above a real report (~30–60 KB), guards abuse. */
+/** ~12 MB of base64 - far above a real report (~30–60 KB), guards abuse. */
 const MAX_PDF_BASE64 = 12 * 1024 * 1024;
 
 const json = (body: unknown, status: number) => Response.json(body, { status, headers: CORS });
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.warn("[roi-report] RESEND_API_KEY not set — cannot send report");
+      console.warn("[roi-report] RESEND_API_KEY not set - cannot send report");
       return json({ error: "Email delivery is not configured. Please email contact@identyca.io." }, 503);
     }
 

@@ -34,9 +34,9 @@ import { Testimonials } from "@/components/home/home-sections";
 import { DEMO_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Real-time — spatial networking & event management",
+  title: "Real-time - spatial networking & event management",
   description:
-    "Identyca Real-time: smart badges, AR glasses and a 360° event platform. See who matters on the event floor — hands-free, opt-in, no facial recognition.",
+    "Identyca Real-time: smart badges, AR glasses and a 360° event platform. See who matters on the event floor - hands-free, opt-in, no facial recognition.",
 };
 
 export default function RealtimePage() {
@@ -49,7 +49,7 @@ export default function RealtimePage() {
             See who <Accent>matters</Accent>. Connect instantly.
           </>
         }
-        lead="No scanning. No awkward small talk. No friction. Just instant, spatial awareness of everyone around you — so networking finally works."
+        lead="No scanning. No awkward small talk. No friction. Just instant, spatial awareness of everyone around you - so networking finally works."
         actions={
           <>
             <Cta href={DEMO_HREF} trailingIcon={RiArrowRightLine}>
@@ -88,7 +88,7 @@ export default function RealtimePage() {
               },
               {
                 title: "See identities instantly",
-                body: "Floating name cards appear above every person — name, title, company and relevance score. No phone. No scanning. No awkwardness.",
+                body: "Floating name cards appear above every person - name, title, company and relevance score. No phone. No scanning. No awkwardness.",
               },
             ]}
           />
@@ -123,8 +123,8 @@ export default function RealtimePage() {
           <FeatureGrid
             className="mt-14"
             items={[
-              { icon: RiEyeLine, title: "Live identity overlay", body: "Floating labels show name, title, company and relevance score above every person — updating in real time as people move." },
-              { icon: RiRadarLine, title: "Proximity radar", body: "A spatial mini-map shows who's nearby, their distance and movement — helping you navigate the floor with purpose." },
+              { icon: RiEyeLine, title: "Live identity overlay", body: "Floating labels show name, title, company and relevance score above every person - updating in real time as people move." },
+              { icon: RiRadarLine, title: "Proximity radar", body: "A spatial mini-map shows who's nearby, their distance and movement - helping you navigate the floor with purpose." },
               { icon: RiFilter3Line, title: "Smart filtering", body: "Filter by seniority, industry, company size or intent. Only see the people who match your goals." },
               { icon: RiRouteLine, title: "Smart navigation", body: "Guided directions to any selected delegate or exhibition booth on the event floor. Walk straight to the people who matter." },
               { icon: RiBarChartBoxLine, title: "Interaction analytics", body: "Post-event reports showing dwell time, hot zones, sponsor booth engagement and attendee journey maps." },
@@ -148,8 +148,8 @@ export default function RealtimePage() {
           />
           <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "Sensor-based positioning", b: "Know exactly who is standing next to you — not just who is in the same room.", c: ["30–50 cm accuracy", "~100 m range"] },
-              { t: "Sensor fusion", b: "Positioning and IMU sensors fused in real time for stable, low-latency identity tracking — even in crowds.", c: ["Real-time fusion", "<50 ms latency"] },
+              { t: "Sensor-based positioning", b: "Know exactly who is standing next to you - not just who is in the same room.", c: ["30–50 cm accuracy", "~100 m range"] },
+              { t: "Sensor fusion", b: "Positioning and IMU sensors fused in real time for stable, low-latency identity tracking - even in crowds.", c: ["Real-time fusion", "<50 ms latency"] },
               { t: "AR rendering engine", b: "Spatial anchors rendered as floating overlays on lightweight AR glasses designed for all-day comfort.", c: ["60 fps overlay", "Lightweight optics"] },
               { t: "Privacy-first design", b: "Zero facial recognition. Identity is broadcast only by opt-in smart badge. Attendees control their visibility.", c: ["No facial recognition", "Opt-in only"] },
             ].map((x) => (
@@ -188,7 +188,7 @@ export default function RealtimePage() {
                 One platform to plan, run and <Accent>grow</Accent> your event.
               </>
             }
-            lead="Everything you need — in one unified platform."
+            lead="Everything you need - in one unified platform."
           />
           <FeatureGrid
             className="mt-14"
@@ -198,16 +198,16 @@ export default function RealtimePage() {
               { icon: RiPriceTag3Line, title: "Ticket pricing", body: "Flexible pricing engine for early bird, standard, VIP and group rates with dynamic discount rules." },
               { icon: RiIdCardLine, title: "Badge design & smart badge issuance", body: "Design branded delegate badges and issue smart badges in NFC, NFC+QR and UWB real-time sensor formats." },
               { icon: RiSmartphoneLine, title: "Real-time networking app", body: "Live spatial networking app that maps every attendee in real time and surfaces the most relevant connections." },
-              { icon: RiPaletteLine, title: "Event branding designer", body: "AI-enabled module for signage, banners, backdrops and branded collateral — no design team required." },
+              { icon: RiPaletteLine, title: "Event branding designer", body: "AI-enabled module for signage, banners, backdrops and branded collateral - no design team required." },
               { icon: RiBarChartBoxLine, title: "Real-time analytics", body: "Live dashboards tracking session attendance, exhibitor traffic, zone occupancy and audience engagement." },
-              { icon: RiCommandLine, title: "Operational command center", body: "Real-time operations hub powered by Voice AI — monitor, coordinate and respond from one screen." },
+              { icon: RiCommandLine, title: "Operational command center", body: "Real-time operations hub powered by Voice AI - monitor, coordinate and respond from one screen." },
               { icon: RiMailSendLine, title: "Email & marketing campaigns", body: "Pre-event reminders, session announcements, sponsor promotions and post-event follow-ups." },
               { icon: RiCalendarScheduleLine, title: "Agenda & speaker management", body: "Build and publish your agenda, manage speaker profiles, coordinate schedules and push live updates." },
               { icon: RiTruckLine, title: "Event equipment tracking", body: "Track AV equipment, furniture and event assets in real time across your venue using smart sensor badges." },
             ]}
           />
           <Reveal className="mt-14">
-            <VideoPlayer src={VIDEOS.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time — product explainer" />
+            <VideoPlayer src={VIDEOS.realtime} poster="/images/poster-rt-v2.jpg" title="Identyca Real-time - product explainer" />
           </Reveal>
         </Container>
       </Section>
@@ -219,7 +219,7 @@ export default function RealtimePage() {
             eyebrow="Built for event ROI"
             title={
               <>
-                Identyca doesn&apos;t cost your event money — it <Accent>makes</Accent> your event money.
+                Identyca doesn&apos;t cost your event money - it <Accent>makes</Accent> your event money.
               </>
             }
           />
@@ -227,11 +227,11 @@ export default function RealtimePage() {
             className="mt-14"
             items={[
               { icon: RiUserStarLine, title: "Increase sponsor ROI", body: "Sponsors connect only with pre-qualified, relevant attendees. Every conversation has intent. Expect a 3–5× increase in exhibitor satisfaction." },
-              { icon: RiMoneyDollarCircleLine, title: "New revenue stream", body: "Rent AR glasses to sponsors and VIP delegates at a premium. Fully offset the platform cost — and profit on the hardware." },
+              { icon: RiMoneyDollarCircleLine, title: "New revenue stream", body: "Rent AR glasses to sponsors and VIP delegates at a premium. Fully offset the platform cost - and profit on the hardware." },
               { icon: RiVipCrownLine, title: "Premium VIP experience", body: "A truly differentiated experience for top-tier delegates. AR networking becomes the most talked-about feature of your event." },
               { icon: RiTrophyLine, title: "Differentiate your event", body: "In a crowded market, AR networking is a defensible differentiator. Be first in your category to offer spatial intelligence." },
               { icon: RiDatabase2Line, title: "Monetizable data & analytics", body: "Post-event reports on attendee movement, booth dwell time, networking density and connection conversion rates." },
-              { icon: RiCompass3Line, title: "Model it first", body: "Use the ROI Calculator to see sponsor uplift, renewal improvements and cost offsets — modelled to your event.", meta: <Link href="/roi-calculator" className="text-body-medium text-signal">Open ROI Calculator →</Link> },
+              { icon: RiCompass3Line, title: "Model it first", body: "Use the ROI Calculator to see sponsor uplift, renewal improvements and cost offsets - modelled to your event.", meta: <Link href="/roi-calculator" className="text-body-medium text-signal">Open ROI Calculator →</Link> },
             ]}
           />
         </Container>

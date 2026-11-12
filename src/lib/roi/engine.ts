@@ -250,10 +250,10 @@ export const DEFAULT_FORM: RoiFormValues = {
 };
 
 /**
- * Fallback used when reading form values — PARITY WITH THE ORIGINAL SITE.
+ * Fallback used when reading form values - PARITY WITH THE ORIGINAL SITE.
  *
  * The original `readInputs()` used `value || default`, so an entered 0 (or an
- * empty / NaN field) silently becomes the default — e.g. 0 exhibitors → 25,
+ * empty / NaN field) silently becomes the default - e.g. 0 exhibitors → 25,
  * 0 sponsorship slots → 2, 0% renewal → 65%. Kept deliberately so results
  * match the legacy calculator. To let users enter real zeros, change this to
  * `Number.isFinite(value) ? value : fallback` (note: that changes outputs for

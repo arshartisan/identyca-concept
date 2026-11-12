@@ -29,7 +29,7 @@ import { ScrollFade, useScrollFade } from "@/components/foundations/scroll-fade/
 import { cx, sortCx } from "@/utils/cx";
 
 /**
- * Modal — a centred dialog over a dimmed page, built on React Aria's
+ * Modal - a centred dialog over a dimmed page, built on React Aria's
  * ModalOverlay / Modal / Dialog: focus is trapped inside and returns to the
  * trigger on close, the page behind stops scrolling, and Escape or a press on
  * the backdrop dismisses it.

@@ -8,25 +8,25 @@ import { VenueVisual } from "@/components/home/product-suite";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Spaces — badge-less networking & wayfinding for venues",
+  title: "Spaces - badge-less networking & wayfinding for venues",
   description:
     "Turn your hotel, convention centre or expo venue into a live, navigable environment. One beacon install, one annual licence, resold into every event you host.",
 };
 
 const VENUE_PROBLEMS = [
-  { title: "Organisers shortlist on technology", body: "The modern event buyer expects intelligent infrastructure. A smart floor plan is now a competitive differentiator — not a nice-to-have." },
-  { title: "The building has no real-time context", body: "Your team cannot see where people are, where zones are filling up, or where problems are forming — until it's too late to act." },
-  { title: "Large B2B events fail at networking", body: "Networking at scale needs spatial intelligence — who is nearby, who is relevant, who to approach. Without it, delegates leave with fewer connections." },
+  { title: "Organisers shortlist on technology", body: "The modern event buyer expects intelligent infrastructure. A smart floor plan is now a competitive differentiator - not a nice-to-have." },
+  { title: "The building has no real-time context", body: "Your team cannot see where people are, where zones are filling up, or where problems are forming - until it's too late to act." },
+  { title: "Large B2B events fail at networking", body: "Networking at scale needs spatial intelligence - who is nearby, who is relevant, who to approach. Without it, delegates leave with fewer connections." },
   { title: "Guests are lost inside your building", body: "Indoor navigation is unsolved for most venues. Guests miss sessions, exhibitors and F&B simply because they can't find them." },
-  { title: "You know less than you should", body: "Occupancy, flow, dwell time, dead zones — this data should be standard. Instead, operators rely on post-event surveys and intuition." },
+  { title: "You know less than you should", body: "Occupancy, flow, dwell time, dead zones - this data should be standard. Instead, operators rely on post-event surveys and intuition." },
   { title: "Expos need experiences, not just space", body: "Gamification, location-triggered activations and crowd intelligence are only possible with a live floor layer." },
 ];
 
 const HOW = [
-  { icon: RiSignalTowerLine, title: "Install", body: "Battery-powered UWB + BLE beacons placed across halls, foyers and corridors — no cabling, no structural drilling, no venue shutdown." },
+  { icon: RiSignalTowerLine, title: "Install", body: "Battery-powered UWB + BLE beacons placed across halls, foyers and corridors - no cabling, no structural drilling, no venue shutdown." },
   { icon: RiSmartphoneLine, title: "Open", body: "The guest opens the event app and opts in. Their phone starts listening to the beacon network immediately." },
-  { icon: RiFocus3Line, title: "Locate", body: "The phone computes its own position — centimetre-grade over UWB, with a 2–5 m BLE fallback for older handsets." },
-  { icon: RiStackLine, title: "Deliver", body: "Networking, wayfinding, zone triggers, gamification, crowd intelligence and venue analytics — all from the same live position layer." },
+  { icon: RiFocus3Line, title: "Locate", body: "The phone computes its own position - centimetre-grade over UWB, with a 2–5 m BLE fallback for older handsets." },
+  { icon: RiStackLine, title: "Deliver", body: "Networking, wayfinding, zone triggers, gamification, crowd intelligence and venue analytics - all from the same live position layer." },
 ];
 
 const USES = [
@@ -38,7 +38,7 @@ const USES = [
   {
     icon: RiRouteLine,
     title: "Movement & experience",
-    items: ["Turn-by-turn indoor wayfinding", "Location-triggered experiences", "Gamification — stand passports, treasure hunts, leaderboards, prize zones", "Queue and crowd intelligence", "Accessibility routing", "Session auto check-in"],
+    items: ["Turn-by-turn indoor wayfinding", "Location-triggered experiences", "Gamification - stand passports, treasure hunts, leaderboards, prize zones", "Queue and crowd intelligence", "Accessibility routing", "Session auto check-in"],
   },
   {
     icon: RiShieldCheckLine,
@@ -48,8 +48,8 @@ const USES = [
 ];
 
 const EVENT_TYPES = {
-  "B2B — business & professional": ["Conferences", "Tradeshows", "Expos", "Business conventions", "Symposiums", "Business summits"],
-  "B2C — consumer & mixed": ["Concerts & festivals", "Consumer expos & fairs", "Sporting events", "Weddings", "Career fairs", "AGMs", "Product launches"],
+  "B2B - business & professional": ["Conferences", "Tradeshows", "Expos", "Business conventions", "Symposiums", "Business summits"],
+  "B2C - consumer & mixed": ["Concerts & festivals", "Consumer expos & fairs", "Sporting events", "Weddings", "Career fairs", "AGMs", "Product launches"],
 };
 
 export default function SpacesPage() {
@@ -120,7 +120,7 @@ export default function SpacesPage() {
             items={[
               { title: "No badges. No per-event hardware.", body: "The smartphone works out its own position by listening to venue beacons. Nothing to buy, print, hand out, chase or bin." },
               { title: "Centimetre accuracy.", body: "Independent validation measured under 80 cm error in static tests, with over 99% of position fixes inside 1 m." },
-              { title: "Scales to any crowd.", body: "Beacons only broadcast, never receive. 500 attendees or 50,000 — the load on the infrastructure is identical." },
+              { title: "Scales to any crowd.", body: "Beacons only broadcast, never receive. 500 attendees or 50,000 - the load on the infrastructure is identical." },
             ]}
           />
         </Container>
@@ -152,7 +152,7 @@ export default function SpacesPage() {
                 Four steps. One <Accent>permanent</Accent> layer.
               </>
             }
-            lead="Installed in your building once. Works for every event you host — B2B or B2C, 500 or 50,000."
+            lead="Installed in your building once. Works for every event you host - B2B or B2C, 500 or 50,000."
           />
           <Stagger as="ol" className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {HOW.map((h, i) => (
@@ -184,7 +184,7 @@ export default function SpacesPage() {
                 One layer. Three dimensions of <Accent>value</Accent>.
               </>
             }
-            lead="Every capability runs from the same beacon infrastructure — chosen by the event organiser for each event."
+            lead="Every capability runs from the same beacon infrastructure - chosen by the event organiser for each event."
           />
           <Stagger className="mt-14 grid gap-4 lg:grid-cols-3">
             {USES.map((u) => (
@@ -210,7 +210,7 @@ export default function SpacesPage() {
                 Built for <Accent>every</Accent> kind of event.
               </>
             }
-            lead="The same permanent venue layer serves every format — from intimate business summits to stadium-scale consumer expos."
+            lead="The same permanent venue layer serves every format - from intimate business summits to stadium-scale consumer expos."
           />
           <div className="mt-14 grid gap-10 md:grid-cols-2">
             {Object.entries(EVENT_TYPES).map(([group, list]) => (
@@ -239,12 +239,12 @@ export default function SpacesPage() {
                 Let&apos;s survey your <Accent>halls</Accent>.
               </>
             }
-            lead="Three steps from first conversation to venue-wide deployment — with no commitment until you see the fixed quote."
+            lead="Three steps from first conversation to venue-wide deployment - with no commitment until you see the fixed quote."
           />
           <Stagger as="ol" className="mt-14 grid gap-4 md:grid-cols-3">
             {[
               { t: "Site survey", b: "One day, free. We survey your halls, map the beacon positions and issue a fixed quote. No commitment required." },
-              { t: "Pilot hall", b: "One hall, one live event. Launch-partner pricing. Full platform active — networking, wayfinding, analytics." },
+              { t: "Pilot hall", b: "One hall, one live event. Launch-partner pricing. Full platform active - networking, wayfinding, analytics." },
               { t: "Venue-wide", b: "Phased rollout across all halls. Staff certified on the platform. Identyca Spaces on your rate card for every event." },
             ].map((s, i) => (
               <StaggerItem as="li" key={s.t}>
