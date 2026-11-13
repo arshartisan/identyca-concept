@@ -25,7 +25,7 @@ const VENUE_PROBLEMS = [
 const HOW = [
   { icon: RiSignalTowerLine, title: "Install", body: "Battery-powered UWB + BLE beacons placed across halls, foyers and corridors - no cabling, no structural drilling, no venue shutdown." },
   { icon: RiSmartphoneLine, title: "Open", body: "The guest opens the event app and opts in. Their phone starts listening to the beacon network immediately." },
-  { icon: RiFocus3Line, title: "Locate", body: "The phone computes its own position - centimetre-grade over UWB, with a 2–5 m BLE fallback for older handsets." },
+  { icon: RiFocus3Line, title: "Locate", body: "The phone computes its own position - sub-metre over UWB, with a 2–5 m BLE fallback for older handsets." },
   { icon: RiStackLine, title: "Deliver", body: "Networking, wayfinding, zone triggers, gamification, crowd intelligence and venue analytics - all from the same live position layer." },
 ];
 
@@ -119,7 +119,7 @@ export default function SpacesPage() {
             className="mt-14"
             items={[
               { title: "No badges. No per-event hardware.", body: "The smartphone works out its own position by listening to venue beacons. Nothing to buy, print, hand out, chase or bin." },
-              { title: "Centimetre accuracy.", body: "Independent validation measured under 80 cm error in static tests, with over 99% of position fixes inside 1 m." },
+              { title: "Sub-metre accuracy.", body: "Independent validation measured under 1 m error, with over 99% of position fixes inside 1 m." },
               { title: "Scales to any crowd.", body: "Beacons only broadcast, never receive. 500 attendees or 50,000 - the load on the infrastructure is identical." },
             ]}
           />

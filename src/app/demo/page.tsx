@@ -8,7 +8,7 @@ import { CONTACT_EMAIL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Book a demo",
   description:
-    "Bring AR networking to your next event. Book a demo or reserve a pilot slot for your 2026 event with Identyca.",
+    "Bring Spatial networking to your next event. Book a demo or reserve a pilot slot for your 2026 event with Identyca.",
 };
 
 const POINTS = [
@@ -41,7 +41,7 @@ export default function DemoPage() {
           </Reveal>
           <Reveal delay={0.05}>
             <h1 className="text-hero text-balance text-text-primary">
-              Bring AR networking to your <Accent>next event</Accent>.
+              Bring Spatial networking to your <Accent>next event</Accent>.
             </h1>
           </Reveal>
           <Reveal delay={0.1}>

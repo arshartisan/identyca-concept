@@ -149,7 +149,7 @@ export default function RealtimePage() {
           />
           <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "Sensor-based positioning", b: "Know exactly who is standing next to you - not just who is in the same room.", c: ["30–50 cm accuracy", "~100 m range"] },
+              { t: "Sensor-based positioning", b: "Know exactly who is standing next to you - not just who is in the same room.", c: ["<1 m accuracy", "~100 m range"] },
               { t: "Sensor fusion", b: "Positioning and IMU sensors fused in real time for stable, low-latency identity tracking - even in crowds.", c: ["Real-time fusion", "<50 ms latency"] },
               { t: "AR rendering engine", b: "Spatial anchors rendered as floating overlays on lightweight AR glasses designed for all-day comfort.", c: ["60 fps overlay", "Lightweight optics"] },
               { t: "Privacy-first design", b: "Zero facial recognition. Identity is broadcast only by opt-in smart badge. Attendees control their visibility.", c: ["No facial recognition", "Opt-in only"] },

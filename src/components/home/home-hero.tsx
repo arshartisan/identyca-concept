@@ -203,16 +203,6 @@ export function HomeHero() {
 
       <Container className="relative">
         <div className="flex flex-col items-center">
-          <a
-            href="/spaces"
-            style={enter(0)}
-            className="hero-in group inline-flex items-center gap-2 rounded-full border border-border-hairline bg-background-elevated/70 py-1 ps-1 pe-3 text-caption-1-medium text-text-secondary backdrop-blur transition-colors duration-150 hover:border-border-hairline-strong hover:text-text-primary"
-          >
-            <span className="rounded-full bg-signal px-2 py-0.5 text-caption-2-semibold text-neutral-950">New</span>
-            Identyca Spaces<span className="max-sm:hidden"> - the permanent venue layer</span>
-            <RiArrowRightLine className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
-          </a>
-
           <h1 className="sr-only">Identyca - See who matters. Connect instantly.</h1>
 
           {/* Desktop stage: words, connectors, logo tile */}
@@ -278,8 +268,8 @@ export function HomeHero() {
           </div>
 
           <p style={enter(0.12)} className="hero-in text-lead mt-8 max-w-xl text-center text-pretty text-text-secondary md:mt-2">
-            AI + AR intelligence for the conference industry - from the planning table to the event floor to the venue
-            itself.
+            Spatial AI intelligence for the conference industry - from the planning table to the event floor to the
+            venue itself.
           </p>
 
           <div style={enter(0.2)} className="hero-in mt-8 flex flex-col items-center gap-3 sm:flex-row">

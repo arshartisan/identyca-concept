@@ -31,7 +31,7 @@ const PRODUCTS: Product[] = [
     description: "Real-time identity overlay and smart badge networking: hands-free, on the event floor.",
     bullets: [
       "Real-time mapping of every attendee - name, title, company",
-      "30–50 cm spatial positioning of people and equipment via smart sensor badges",
+      "<1 m spatial positioning of people and equipment via smart sensor badges",
       "Live proximity radar, smart filtering and automatic interaction logging",
     ],
     href: "/real-time",

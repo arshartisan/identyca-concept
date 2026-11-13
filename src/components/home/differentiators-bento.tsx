@@ -621,7 +621,7 @@ export function DifferentiatorsBento({ className }: { className?: string }) {
       <BentoCard
         variant="overlay"
         className="lg:col-start-1 lg:row-span-2 lg:row-start-1"
-        title="< 80 cm accuracy"
+        title="< 1 m accuracy"
         visual={(s) => <AccuracyVisual {...s} />}
       />
       <BentoCard

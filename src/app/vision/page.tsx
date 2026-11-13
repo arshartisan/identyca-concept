@@ -79,7 +79,7 @@ export default function VisionPage() {
       <CtaBand
         title={
           <>
-            Bring AR Networking to Your <Accent>Next Event</Accent>
+            Bring Spatial Networking to Your <Accent>Next Event</Accent>
           </>
         }
         lead="Join the pilot cohort of forward-thinking event organizers deploying Identyca at their 2026 events. Slots are limited."

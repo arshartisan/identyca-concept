@@ -101,7 +101,7 @@ export function Numbers() {
 /* ------------------------------------------------------------ Comparison */
 
 const ROWS: [string, string, string, string][] = [
-  ["Real-time attendee location", "30–50 cm accuracy", "-", "-"],
+  ["Real-time attendee location", "<1 m accuracy", "-", "-"],
   ["AI sponsor matching", "Fit-scored shortlist", "-", "Manual research"],
   ["Indoor wayfinding", "Turn-by-turn via beacons", "Static floor maps only", "-"],
   ["Crowd density and zone analytics", "Real-time by zone", "-", "-"],
